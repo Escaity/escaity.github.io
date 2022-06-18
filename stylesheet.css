@@ -16,3 +16,40 @@ img {
   height: 140px;
   display: inline-block;
 }
+
+.button {
+  border: 2px solid grey;
+  display: inline;
+  padding: 8px;
+  margin: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  color: grey;
+  user-select: none; /* 選択を禁止する */
+  transition: border ease 0.3s, color ease 0.2s;
+}
+
+.button:hover {
+  color: aqua;
+  border: 2px solid aqua;
+}
+
+.button:active {
+  color: blue;
+  border: 2px solid aqua;
+}
+
+ul {
+  background-color: azure;
+  padding: 5px;
+}
+
+li {
+  font-size: large;
+  font-weight: bold;
+  padding: 5px;
+}
+
+#dice {
+}
