@@ -50,31 +50,47 @@ ul {
 }
 
 li {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: bold;
 }
 
 #d1 {
-  color: aqua;
+  color: #ff0000;
   transition: all ease 0.3s;
 }
 #d2 {
-  color: greenyellow;
+  color: #ff8700;
   transition: all ease 0.3s;
 }
 #d3 {
-  color: goldenrod;
+  color: #ffd300;
   transition: all ease 0.3s;
 }
 #d4 {
-  color: orange;
+  color: #deff0a;
   transition: all ease 0.3s;
 }
 #d5 {
-  color: plum;
+  color: #a1ff0a;
   transition: all ease 0.3s;
 }
 #d6 {
-  color: red;
+  color: #0aff99;
+  transition: all ease 0.3s;
+}
+#d7 {
+  color: #0aefff;
+  transition: all ease 0.3s;
+}
+#d8 {
+  color: #147df5;
+  transition: all ease 0.3s;
+}
+#d9 {
+  color: #580aff;
+  transition: all ease 0.3s;
+}
+#d10 {
+  color: #be0aff;
   transition: all ease 0.3s;
 }
