@@ -33,6 +33,7 @@ img {
 .button:hover {
   color: aqua;
   border: 2px solid aqua;
+  cursor: pointer;
 }
 
 .button:active {
