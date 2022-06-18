@@ -42,14 +42,12 @@ img {
 }
 
 ul {
-  background-color: azure;
-  padding: 5px;
+  background-color: white;
 }
 
 li {
-  font-size: larger;
+  font-size: 32px;
   font-weight: bold;
-  padding: 8px;
 }
 
 #d1 {
