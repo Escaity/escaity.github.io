@@ -47,7 +47,32 @@ ul {
 }
 
 li {
-  font-size: large;
+  font-size: larger;
   font-weight: bold;
-  padding: 5px;
+  padding: 8px;
+}
+
+#d1 {
+  color: aqua;
+  transition: all ease 0.3s;
+}
+#d2 {
+  color: greenyellow;
+  transition: all ease 0.3s;
+}
+#d3 {
+  color: goldenrod;
+  transition: all ease 0.3s;
+}
+#d4 {
+  color: orange;
+  transition: all ease 0.3s;
+}
+#d5 {
+  color: plum;
+  transition: all ease 0.3s;
+}
+#d6 {
+  color: red;
+  transition: all ease 0.3s;
 }
