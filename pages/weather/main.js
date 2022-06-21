@@ -137,7 +137,7 @@ function displayWeatherInfo(json) {
 //位置情報の取得加工表示
 function displayLocationInfo(json) {
   const addr = json['address'];
-  htmlLocation.textContent = `${addr.province}${addr.city}${addr.quarter}の週間天気予報`;
+  htmlLocation.textContent = `${addr.province}${addr.city}の週間天気予報`;
 }
 
 //メイン処理
