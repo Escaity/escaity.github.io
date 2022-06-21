@@ -1,0 +1,75 @@
+body {
+  background-color: wheat;
+  font-family: 'Avenir', 'Helvetica Neue', 'Helvetica', 'Arial', 'Hiragino Sans',
+    'ヒラギノ角ゴシック', YuGothic, 'Yu Gothic', 'メイリオ', Meiryo,
+    'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
+#location {
+  margin: 20px 20px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+table {
+  margin: 0 auto;
+  width: 60%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+table th {
+  border-bottom: solid 2px #fb5144;
+  padding: 10px 0;
+  text-align: center;
+}
+table td {
+  padding: 10px 0;
+  text-align: center;
+}
+
+table tr:nth-child(odd) {
+  background-image: linear-gradient(40deg, #fce043 0%, #fb7ba2 84%);
+}
+table tr:nth-child(even) {
+  background-image: linear-gradient(40deg, #fce043 0%, #fb7ba2 84%);
+}
+
+.licence {
+  position: fixed;
+  margin: 10px 10px;
+  bottom: 0;
+}
+
+/* Google Material Icons 設定 */
+
+/* アイコンのサイズを変更するためのルール */
+.material-icons.md-18 {
+  font-size: 18px;
+}
+.material-icons.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+/* 明るい背景の場合に黒色でアイコンを表示するためのルール */
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+/* 暗い背景の場合に白色でアイコンを表示するためのルール */
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}

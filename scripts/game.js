@@ -8,7 +8,7 @@ const log = document.getElementById('log');
 let count = 0;
 let step = 0;
 let date = new Date();
-const today = `${date.getFullYear()}${(date.getMonth() + 1)
+let today = `${date.getFullYear()}${(date.getMonth() + 1)
   .toString()
   .padStart(2, '0')}${date.getDate()} `;
 let listTiles = document.getElementsByClassName('listTile');
