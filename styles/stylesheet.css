@@ -54,10 +54,19 @@ img {
   transition: border ease 0.3s, color ease 0.2s;
 }
 
+.button a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
 .button:hover {
   color: aqua;
   border: 2px solid aqua;
   cursor: pointer;
+  transition-delay: 0.1s;
 }
 
 .button:active {

@@ -10,8 +10,9 @@ let step = 0;
 let date = new Date();
 let today = `${date.getFullYear()}${(date.getMonth() + 1)
   .toString()
-  .padStart(2, '0')}${date.getDate()} `;
+  .padStart(2, '0')}${date.getDate()}${date.getHours()}`;
 let listTiles = document.getElementsByClassName('listTile');
+let resultTile = '';
 
 const ansList = document.createElement('li');
 ansList.textContent = today;
@@ -19,7 +20,6 @@ ulAns.appendChild(ansList);
 
 const createTile = () => {
   const list = document.createElement('li');
-  let joinedTile = '';
 
   list.className = 'listTile';
   if (count < 0) {
@@ -39,20 +39,27 @@ const createTile = () => {
       count = 0;
     }
     startButton.textContent = `+` + count;
+    const updateTile = document.getElementsByClassName('listTile');
+    resultTile = '';
+    Array.prototype.forEach.call(updateTile, (x) => {
+      resultTile += x.textContent;
+    });
+
+    if (resultTile === today) {
+      alert(`クリアしました！！ ステップ数:${step}`);
+    }
   });
   ulTile.appendChild(list);
   count++;
   step++;
   stepSpan.textContent = step;
   startButton.textContent = `+` + count;
+  resultTile = '';
   Array.prototype.forEach.call(listTiles, (x) => {
-    joinedTile += x.textContent;
+    resultTile += x.textContent;
   });
-  console.log(joinedTile, today);
-  if (joinedTile.toString() == today) {
-    log.textContent = 'CLEAR!';
-  } else {
-    log.textContent = joinedTile;
+  if (resultTile === today) {
+    alert(`クリアしました！！ ステップ数:${step}`);
   }
 };
 
