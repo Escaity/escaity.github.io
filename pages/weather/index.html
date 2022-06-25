@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>お天気アプリ</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./css/sanitize.css" />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
@@ -15,14 +16,21 @@
         <tr id="dateInfo">
           <th>日付</th>
         </tr>
+        <tr id="weatherCodeInfo">
+          <th>天気</th>
+        </tr>
         <tr id="weatherInfo">
           <th>気温(正午)</th>
         </tr>
       </tbody>
     </table>
+    <div class="chart-container">
+      <canvas id="myChart" width="640" height="300"></canvas>
+    </div>
     <footer>
       <div class="licence">© 2022. All rights reserved.</div>
     </footer>
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module" src="constant.js"></script>
   </body>
 </html>
