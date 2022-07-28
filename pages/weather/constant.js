@@ -40,10 +40,10 @@ export const getWeatherCode = (code) => {
     case 86:
       return './images/rain.png';
     case 95:
-      return './images/lightning_cloud.png';
+      return './images/cloudy_rain.png';
     case 96:
     case 99:
-      return './images/lightning_cloud.png';
+      return './images/cloudy_rain.png';
     default:
       return '';
   }
