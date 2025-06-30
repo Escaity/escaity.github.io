@@ -1,0 +1,23 @@
+---
+import PostViewTitle from '../components/PostViewTitle.astro'
+const {blog} = Astro.props;
+const {data, slug} = blog
+---
+
+<div class="shadow-md rounded-xl p-4 grid grid-cols-12 bg-skin-fill">
+  <div class="col-span-11">
+    <PostViewTitle
+      slug={`/blog/${slug}`}
+      {...data}
+    >
+    </PostViewTitle>
+    <p class="break-all text-skin-base mb-2">
+      {
+        data.description ? data.description.substring(0,55) : ''
+      }
+    </p>
+  </div>
+  <div class="hover:bg-skin-active text-center rounded-xl col-span-1 bg-skin-accent">
+    <a class="text-skin-accent h-full flex justify-center items-center text-3xl ri-arrow-right-wide-fill" href={`/blog/${slug}`}></a>
+  </div>
+</div>

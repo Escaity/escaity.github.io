@@ -1,0 +1,35 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Profile from '../components/Profile.astro'
+import BlogAside from '../components/BlogAside.astro'
+---
+
+<html lang="ja">
+<BaseHead/>
+
+<body class="bg-skin-secondary relative">
+<Header/>
+<main class="container p-4 pt-20 text-skin-base pb-32 min-h-full relative" id="app">
+  <div class="grid grid-cols-4 gap-8">
+    <div>
+      <div class="hidden xl:block space-y-6">
+        <Profile></Profile>
+        <BlogAside></BlogAside>
+      </div>
+    </div>
+
+    <div class="col-span-4 xl:col-span-3 space-y-6">
+      <slot></slot>
+    </div>
+  </div>
+  <Footer/>
+</main>
+</body>
+<script>
+  document.body.querySelectorAll("a").forEach(item => {
+    item.setAttribute("rel", "nofollow noreferrer");
+  });
+</script>
+</html>

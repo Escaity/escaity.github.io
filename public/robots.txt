@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sncreate.blue/sitemap-0.xml
