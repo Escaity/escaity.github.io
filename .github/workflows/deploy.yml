@@ -1,22 +1,10 @@
-name: Deploy Astro site to Pages
+name: Deploy to GitHub Pages
 
 on:
-  # `main` ブランチへのプッシュ時に実行
   push:
-    branches: [ "main" ]
-  # Actions タブから手動でワークフローを実行可能にする
-  workflow_dispatch:
-
-# ワークフローの実行に必要な権限を設定
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 1つのジョブだけを並行して実行できるようにする
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -28,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -36,17 +24,6 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Verify build output
-        run: |
-          if [ ! -d "./dist" ]; then
-            echo "Build output directory not found!"
-            exit 1
-          fi
-          ls -la ./dist
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -56,13 +33,16 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # デプロイジョブにも権限を明示的に設定
+    if: github.ref == 'refs/heads/main'
+
     permissions:
       pages: write
       id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
