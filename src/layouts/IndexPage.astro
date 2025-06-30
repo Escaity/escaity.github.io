@@ -28,6 +28,22 @@ import BlogAside from '../components/BlogAside.astro'
 </main>
 </body>
 <script>
+
+  import { analytics } from '../utils/analytics';
+
+  // ページビューの自動追跡
+  analytics.trackPageView();
+
+  // 外部リンクの自動追跡
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    const link = target.closest('a');
+
+    if (link && link.hostname !== window.location.hostname) {
+      analytics.trackOutboundLink(link.href, link.textContent?.trim());
+    }
+  });
+
   document.body.querySelectorAll("a").forEach(item => {
     item.setAttribute("rel", "nofollow noreferrer");
   });

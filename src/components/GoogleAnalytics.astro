@@ -1,0 +1,32 @@
+---
+// src/components/GoogleAnalytics.astro
+import {getAnalyticsConfig} from '../config/analytics';
+
+const config = getAnalyticsConfig();
+---
+
+{config.enabled && (
+  <>
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${
+        config.gaId
+      }`}
+    />
+    <script
+      is:inline
+      define:vars={{ config }}
+    >
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", config.gaId, {
+        page_title: document.title,
+        page_location: window.location.href,
+        debug_mode: config.debug
+      });
+    </script>
+</>
+)}

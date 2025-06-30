@@ -36,6 +36,22 @@ const {frontmatter = {comment: false, donate: false, toc: false, mathjax: false,
   import { Fancybox } from "@fancyapps/ui";
   import "@fancyapps/ui/dist/fancybox/fancybox.css";
   Fancybox.bind("[data-fancybox]");
+
+  import { analytics } from '../utils/analytics';
+
+  // ページビューの自動追跡
+  analytics.trackPageView();
+
+  // 外部リンクの自動追跡
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    const link = target.closest('a');
+
+    if (link && link.hostname !== window.location.hostname) {
+      analytics.trackOutboundLink(link.href, link.textContent?.trim());
+    }
+  });
+
   // 给所有的a标签添加target属性和不追踪
   const markdownBody = document.querySelector(".markdown-body");
   // 如果没有markdownBody则直接返回
