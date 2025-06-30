@@ -1,11 +1,13 @@
 ---
 import '../styles/index.css'
 import {site, config} from "../consts";
+import GoogleAnalytics from './GoogleAnalytics.astro';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-const {mathjax = false, mermaid = false} = Astro.props
 ---
 <head>
+  <!-- Google tag (gtag.js) -->
+  <GoogleAnalytics/>
+
   <!-- Global Metadata -->
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -33,46 +35,12 @@ const {mathjax = false, mermaid = false} = Astro.props
   <meta property="twitter:description" content={site.description}/>
   <meta property="twitter:image" content={new URL(site.avatar, Astro.site?.href).href}/>
 
-  <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="msapplication-TileColor" content="#da532c"/>
   <meta name="msapplication-config" content="/browserconfig.xml"/>
   <meta name="theme-color" content="#ffffff"/>
 
-  <link rel="sitemap" href="/sitemap-0.xml"/>
   <title>{site.title}</title>
   <script is:inline src="/toggle-theme.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [
-          ["\\(", "\\)"],
-        ],
-      },
-    });
-  </script>
-  {
-    mathjax &&
-    <script async type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
-  }
-  {
-    mermaid &&
-    <script async type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
 
-  }
-  {
-    config.busuanzi && <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  }
-  <!-- Google tag (gtag.js) -->
-  {
-    config.ga && <>
-    <script src={"https://www.googletagmanager.com/gtag/js?id=" +　config.ga}></script>
-    <script define:vars={{ga: config.ga}} >
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', ga);
-    </script>
-    </>
-  }
 </head>
