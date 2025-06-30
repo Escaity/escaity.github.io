@@ -20,8 +20,8 @@ export const site = {
   description: 'AIと対話記録をメモしてます',
   author: "Escaity", // required
   avatar: '/avatar.png', // required
-  motto: 'Learn from your mistakes.',
-  url: 'https://sncreate.blue',
+  motto: 'True wealth is experience.',
+  url: 'https://escaity.github.io',
   recentBlogSize: 5,
   archivePageSize: 25,
   postPageSize: 6,
