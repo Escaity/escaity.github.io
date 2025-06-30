@@ -28,7 +28,9 @@ function customRehypeLazyLoadImage() {
 }
 
 export default defineConfig({
-  site: 'https://sncreate.blue/',
+  site: 'https://escaity.github.io/',
+  output: 'static',
+  adapter: undefined,
   integrations: [sitemap(), tailwind(), solid(), expressiveCode({
     plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
     themes: ["github-dark", "github-light"],
