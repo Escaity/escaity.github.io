@@ -6,27 +6,36 @@ const config = getAnalyticsConfig();
 ---
 
 {config.enabled && (
-  <>
-    <script
-      async
-      src={`https://www.googletagmanager.com/gtag/js?id=${
-        config.gaId
-      }`}
-    />
-    <script
-      is:inline
-      define:vars={{ config }}
-    >
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", config.gaId, {
-        page_title: document.title,
-        page_location: window.location.href,
-        debug_mode: config.debug
-      });
-    </script>
+<>
+  <script
+    async
+    src={`https://www.googletagmanager.com/gtag/js?id=${config.gaId}`}
+  />
+  <script
+    is:inline
+    define:vars={{ gaId: config.gaId, debug: config.debug }}
+  >
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", gaId, {
+      page_title: document.title,
+      page_location: window.location.href,
+      debug_mode: debug
+    });
+
+    // デバッグ用（開発環境のみ）
+    if (debug) {
+      console.log('Google Analytics initialized with ID:', gaId);
+    }
+  </script>
 </>
-)}
+  )}
+
+{!config.enabled && import.meta.env.DEV && (
+<script is:inline>
+  console.log('Google Analytics disabled - GA_ID not found or not in production');
+</script>
+  )}

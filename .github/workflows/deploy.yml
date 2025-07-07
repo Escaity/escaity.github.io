@@ -1,20 +1,15 @@
 name: Deploy Astro site to Pages
 
 on:
-  # `main` ブランチへのプッシュ時に実行
   push:
     branches: [ "main" ]
-
-  # Actions タブから手動でワークフローを実行可能にする
   workflow_dispatch:
 
-# ワークフローの実行に必要な権限を設定
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 1つのジョブだけを並行して実行できるようにする
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -29,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # ご自身のプロジェクトに合わせる
+          node-version: "20"
           cache: 'npm'
 
       - name: Install dependencies
@@ -38,8 +33,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          PUBLIC_GA_ID: ${{ secrets.GA_ID }}
-
+          PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -47,11 +41,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Astroのビルド出力ディレクトリ (`dist`) をアップロード
           path: ./dist
 
   deploy:
-    # `build` ジョブの完了を待つ
     needs: build
     runs-on: ubuntu-latest
     environment:
