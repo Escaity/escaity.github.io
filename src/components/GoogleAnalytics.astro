@@ -1,13 +1,13 @@
 ---
 import {getAnalyticsConfig} from '../config/analytics';
 
-const {gaId, enabled} = getAnalyticsConfig();
+const GA_ID = import.meta.env.PUBLIC_GA_ID;
 ---
 
-{enabled && (
+{GA_ID && (
 <>
-  <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}/>
-  <script define:vars={{gaId}}>
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}/>
+  <script define:vars={{GA_ID}}>
     window.dataLayer = window.dataLayer || [];
 
     function gtag() {
@@ -15,7 +15,7 @@ const {gaId, enabled} = getAnalyticsConfig();
     }
 
     gtag('js', new Date());
-    gtag('config', gaId);
+    gtag('config', GA_ID);
   </script>
 </>
   )}
