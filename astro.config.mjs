@@ -43,11 +43,5 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkModifiedTime, resetRemark, remarkDirective, remarkAsides({}) ],
     rehypePlugins: [customRehypeLazyLoadImage],
-  },
-  // ビルド時に環境変数を公開
-  vite: {
-    define: {
-      'import.meta.env.PUBLIC_GA_ID': JSON.stringify(process.env.GA_ID)
-    }
   }
 });

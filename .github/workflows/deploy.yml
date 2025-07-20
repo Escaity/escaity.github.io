@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PUBLIC_GA_ID: ${{ secrets.GA_ID }}
+      PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
