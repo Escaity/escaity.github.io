@@ -17,8 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PUBLIC_GA_ID: ${{ secrets.PUBLIC_GA_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,9 +30,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Create .env
+        run:
+          echo "PUBLIC_GA_ID=${{ secrets.PUBLIC_GA_ID }}" >> .env
+
       - name: Build
         run: npm run build
-
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
