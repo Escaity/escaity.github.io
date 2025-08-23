@@ -12,7 +12,7 @@ MacBookを長時間放置していたところ時刻が1時間ほどズレてい
 ## 1. Macのシステム設定(時刻)を変更する
 **システム設定 > 日付と時刻** の設定項目にある　"**現在の位置情報に基づいて、時間帯を自動的に設定**"がOffになっていればOnにします。
 
-<img src="/spinner.gif" data-src="/entries/20240112/system_time_setting.png" style="width:400px;">
+<img src="/spinner.gif" data-src="/entries/20240112/system_time_setting.png" style="width:400px; margin: auto;">
 
 ## 2. Terminalでtimedをkillする
 ターミナルを開き以下のコマンドを入力します。
