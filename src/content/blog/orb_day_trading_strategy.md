@@ -80,4 +80,5 @@ TQQQを用いた結果は下記のように劇的に向上した。
 ---
 
 ### 出典
-Zarattini, C., & Aziz, A. (2023). [*Can Day Trading Really Be Profitable? Evidence of Sustainable Long-term Profits from Opening Range Breakout (ORB) Day Trading Strategy vs. Benchmark in the US Stock Market.*](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4416622) SSRN Electronic Journal.
+
+>Zarattini, C., & Aziz, A. (2023). [*Can Day Trading Really Be Profitable? Evidence of Sustainable Long-term Profits from Opening Range Breakout (ORB) Day Trading Strategy vs. Benchmark in the US Stock Market.*](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4416622) SSRN Electronic Journal.
