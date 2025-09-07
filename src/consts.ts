@@ -88,5 +88,10 @@ export const infoLinks = [
     icon: 'ri-steam-fill',
     name: 'steam',
     outlink: 'https://steamcommunity.com/profiles/76561198258227754/',
+  },
+  {
+    icon: 'ri-twitter-x-fill',
+    name: 'x',
+    outlink: 'https://x.com/v4utm1',
   }
 ]
