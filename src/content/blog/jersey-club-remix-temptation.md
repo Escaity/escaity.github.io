@@ -29,7 +29,7 @@ Remixでは、真夏の太陽を浴びてキラキラと跳ねる水滴に変わ
 
 ---
 
-## 2. Yona Yona Journey - TAKU INOUE & Mori Calliope (PERIXX Edit)  
+## 2. TAKU INOUE & Mori Calliope - Yona Yona Journey (PERIXX Edit)  
 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1517082274&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/perixxsan" title="PERIXX" target="_blank" style="color: #cccccc; text-decoration: none;">PERIXX</a> · <a href="https://soundcloud.com/perixxsan/yona-yona-journey-perixx-edit" title="Yona Yona Journey (PERIXX edit)" target="_blank" style="color: #cccccc; text-decoration: none;">Yona Yona Journey (PERIXX edit)</a></div>
 夜のハイウェイを駆け抜けるような原曲の疾走感。  
 Remixでは、大気圏を突破して無重力の宇宙空間へ放り出されるような感覚。  
