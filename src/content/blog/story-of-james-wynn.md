@@ -65,4 +65,4 @@ Hyperliquidでの敗北の後、俺は新たな戦場としてAster DEXを選ん
 
 >[@JamesWynnReal](https://x.com/JamesWynnReal)
 
->[HyperDash: JamesWynn Address](https://hyperdash.info/zh-CN/trader/0x5078c2fbea2b2ad61bc840bc023e35fce56bedb6)
+>[Arkham: James Wynn](https://intel.arkm.com/explorer/address/0x5078C2fBeA2b2aD61bc840Bc023E35Fce56BeDb6)
