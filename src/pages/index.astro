@@ -1,32 +1,26 @@
 ---
 import PostView from '../components/PostView.astro'
 import IndexPage from '../layouts/IndexPage.astro'
-import {orderBySticky} from "../utils/orderBySticky";
 import {getBlogPosts} from "../utils/posts";
-import {site} from '../consts'
 import Pagination from "../components/Pagination.astro";
+import {getPaginatedBlogPosts} from "../utils/getPaginatedBlogPosts";
 
-let currentPage = 1
-let blogs = await getBlogPosts();
-let totalPage = Math.ceil(blogs.length / site.postPageSize)
-
-let sortedPosts = await orderBySticky(blogs);
-if (sortedPosts.length > site.postPageSize) {
-  sortedPosts = sortedPosts.splice(0, site.postPageSize);
-}
+const blogs = await getBlogPosts();
+const {totalPage, firstPagePosts} = getPaginatedBlogPosts(blogs);
 ---
 
 <IndexPage>
   {
-    sortedPosts.map(blog =>
+    firstPagePosts.map(blog =>
       <PostView blog={blog}></PostView>)
   }
   {
     totalPage > 1 ?
       <Pagination
-        currentPage={currentPage}
+        currentPage={1}
         totalPage={totalPage}
-        url={{prev: '', next: '/blog/2'}}
+        prefixUrl="/blog/"
+        firstPageHref="/"
       /> : ''
   }
 </IndexPage>

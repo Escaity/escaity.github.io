@@ -1,16 +1,30 @@
 ---
-import {site} from "../../consts";
 import PostView from '../../components/PostView.astro'
 import IndexPage from '../../layouts/IndexPage.astro'
 import Pagination from '../../components/Pagination.astro';
-import {orderBySticky} from "../../utils/orderBySticky";
 import {getBlogPosts} from "../../utils/posts";
+import {getPaginatedBlogPosts} from "../../utils/getPaginatedBlogPosts";
 
-export async function getStaticPaths({paginate}) {
-  let posts = await getBlogPosts();
-  let sortedPosts = await orderBySticky(posts);
-  return paginate(sortedPosts, {pageSize: site.postPageSize});
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  const {totalPage, getPagePosts} = getPaginatedBlogPosts(posts);
+
+  return Array.from({length: Math.max(totalPage - 1, 0)}, (_, index) => {
+    const pageNumber = index + 2;
+
+    return {
+      params: {page: String(pageNumber)},
+      props: {
+        page: {
+          currentPage: pageNumber,
+          lastPage: totalPage,
+          data: getPagePosts(pageNumber),
+        },
+      },
+    };
+  });
 }
+
 // 所有分页数据都将传递给 "page" 参数
 const {page} = Astro.props;
 ---
@@ -24,6 +38,7 @@ const {page} = Astro.props;
   <Pagination
     currentPage={page.currentPage}
     totalPage={page.lastPage}
-    url={page.url}
+    prefixUrl="/blog/"
+    firstPageHref="/"
   />
 </IndexPage>
