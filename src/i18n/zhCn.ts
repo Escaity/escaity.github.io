@@ -11,6 +11,8 @@ export  const zhCn = {
   'message.welcomeTips': '既然来了就留个脚印吧！',
   'post.lastUpdated': '最后更新',
   'sidebar.categories': '分类',
+  'sidebar.archive': '归档',
+  'sidebar.archiveMore': '查看更多',
   'sidebar.uncategorized': '未分类',
   'sidebar.tags': '标签',
   'sidebar.recentArticle': '最近文章',

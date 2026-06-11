@@ -36,6 +36,8 @@ export  const en = {
   'search.searchLabelOne':'Found ',
   'search.searchLabelTwo': ' article(s) in total',
   'sidebar.categories': 'Categories',
+  'sidebar.archive': 'Archive',
+  'sidebar.archiveMore': 'View more',
   'sidebar.recentArticle': 'Recent Articles',
   'sidebar.recentComments': 'Recent Comments',
   'sidebar.tags': 'Tags',

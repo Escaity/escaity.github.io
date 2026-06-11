@@ -37,6 +37,8 @@ export const ja = {
   'search.searchLabelOne': '合計',
   'search.searchLabelTwo': '件の記事が見つかりました',
   'sidebar.categories': 'カテゴリー',
+  'sidebar.archive': 'アーカイブ',
+  'sidebar.archiveMore': 'もっと見る',
   'sidebar.recentArticle': '最近の記事',
   'sidebar.recentComments': '最近のコメント',
   'sidebar.tags': 'タグ',

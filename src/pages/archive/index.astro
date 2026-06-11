@@ -14,6 +14,13 @@ let totalPage = _.ceil(_.divide(posts.length, site.archivePageSize));
 let sortedPosts = sortPostsByDate(posts);
 sortedPosts = sortedPosts.splice(0, site.archivePageSize);
 let resultPosts = getPostsByYear(sortedPosts);
+const archiveAnchors = new Set();
+const getArchiveAnchor = (date) => {
+  const key = dayjs(date).format("YYYY-MM");
+  if (archiveAnchors.has(key)) return undefined;
+  archiveAnchors.add(key);
+  return `archive-${key}`;
+};
 ---
 
 <IndexPage>
@@ -25,7 +32,7 @@ let resultPosts = getPostsByYear(sortedPosts);
           <div class="text-2xl font-extrabold my-4">{year}</div>
           <ul>
             {resultPosts[year].map((post) => (
-              <li style="list-style-type: disc;" class="ml-4 my-2">
+              <li id={getArchiveAnchor(post.data.date)} style="list-style-type: disc;" class="ml-4 my-2">
                 <a href={'/' + post.collection + '/' + post.id}>
                   <span class="mr-4">
                     {dayjs(post.data.date).format("YYYY-MM-DD")}

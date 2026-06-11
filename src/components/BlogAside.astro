@@ -1,11 +1,12 @@
 ---
 import {getCollectionByName} from "../utils/getCollectionByName";
-import getUniqueTags from "../utils/getUniqueTags";
 import getCountByCategory from "../utils/getCountByCategory";
+import getPostArchivesByMonth from "../utils/getPostArchivesByMonth";
 import {t} from '../i18n/utils'
 const blogs = await getCollectionByName('blog')
-let tagArr = getUniqueTags(blogs);
 let categoryCount = getCountByCategory(blogs);
+const archives = getPostArchivesByMonth(blogs);
+const archiveLimit = 10;
 ---
 
 <div>
@@ -30,20 +31,32 @@ let categoryCount = getCountByCategory(blogs);
 </div>
 <div>
   {
-    tagArr.length > 0 && (
+    archives.length > 0 && (
       <div class="aside-widget">
-        <i class="ri-price-tag-3-line menu-icon"/>
-        {t('sidebar.tags')}
+        <i class="ri-archive-line menu-icon"/>
+        {t('sidebar.archive')}
       </div>
     )
   }
-  <div class="flex flex-wrap">
+  <div>
     {
-      tagArr &&
-      tagArr.map((tag) =>
-        <a class="inline-block truncate m-1 border p-1 text-sm rounded hover:text-skin-active" title={tag}
-           href={"/tags/" + tag}>{tag}</a>
+      archives.slice(0, archiveLimit).map((archive) =>
+        <a
+          class="my-2 flex items-center justify-between truncate font-semibold hover:text-skin-active"
+          title={`${archive.label} (${archive.count})`}
+          href={archive.href}
+        >
+          <span>{archive.label}</span>
+          <span>({archive.count})</span>
+        </a>
       )
     }
   </div>
+  {
+    archives.length > archiveLimit && (
+      <a class="inline-block mt-2 border rounded-full py-1 px-4 text-sm hover:text-skin-active" href="/archive/1">
+        {t('sidebar.archiveMore')}
+      </a>
+    )
+  }
 </div>

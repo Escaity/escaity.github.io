@@ -38,6 +38,8 @@ export  let cs = {
   'search.searchLabelTwo': ' článek(ů) celkem',
   'search.search': 'Hledat',
   'sidebar.categories': 'Kategorie',
+  'sidebar.archive': 'Archiv',
+  'sidebar.archiveMore': 'Zobrazit více',
   'sidebar.recentArticle': 'Nedávné články',
   'sidebar.recentComments': 'Nedávné komentáře',
   'sidebar.tags': 'Štítky',
@@ -46,5 +48,4 @@ export  let cs = {
   'title.minutes':' Minut',
   'title.words':' Slov'
 }
-
 
