@@ -6,9 +6,6 @@ export  let cs = {
   'aside.note': 'vzít na vědomí',
   'aside.tip':'upozornit na něco',
   'blog.tableOfContent':'Obsah',
-  'feed.next': 'Další',
-  'feed.previous': 'Předchozí',
-  'feed.publishedIn':'Publikováno v',
   'footer.articleAuthor':'Autor článku',
   'footer.articleTitle':'Název článku',
   'footer.busuanziSitePV':'Zobrazení stránky:',
@@ -42,10 +39,8 @@ export  let cs = {
   'sidebar.archiveMore': 'Zobrazit více',
   'sidebar.recentArticle': 'Nedávné články',
   'sidebar.recentComments': 'Nedávné komentáře',
-  'sidebar.tags': 'Štítky',
   'sidebar.uncategorized': 'nekategorizované',
   'title.draft': 'návrh',
   'title.minutes':' Minut',
   'title.words':' Slov'
 }
-

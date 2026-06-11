@@ -20,13 +20,4 @@ const blog = defineCollection({
   }),
 });
 
-const feed = defineCollection({
-  loader: async () => [],
-  schema: z.object({
-    date: z.coerce.date().or(z.string()).optional().nullable(),
-    donate: z.boolean().default(true),
-    comment: z.boolean().default(true),
-  }),
-});
-
-export const collections = { blog, feed };
+export const collections = { blog };

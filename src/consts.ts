@@ -12,7 +12,6 @@
  * recentBlogSize {number} Number of recent articles displayed in the sidebar
  * archivePageSize {number} Number of articles on archive pages
  * postPageSize {number} Number of articles on blog pages
- * feedPageSize {number} Number of articles on feed pages
  */
 export const site = {
   title: 'AIcicle Records', // required
@@ -25,7 +24,6 @@ export const site = {
   recentBlogSize: 5,
   archivePageSize: 25,
   postPageSize: 6,
-  feedPageSize: 10,
 }
 
 /**

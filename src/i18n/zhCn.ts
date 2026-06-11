@@ -14,7 +14,6 @@ export  const zhCn = {
   'sidebar.archive': '归档',
   'sidebar.archiveMore': '查看更多',
   'sidebar.uncategorized': '未分类',
-  'sidebar.tags': '标签',
   'sidebar.recentArticle': '最近文章',
   'sidebar.recentComments': '最近评论',
   'footer.articleTitle':'本文标题',
@@ -29,7 +28,6 @@ export  const zhCn = {
   'footer.busuanziSitePVUnit':'次',
   'footer.busuanziSiteUV':'总访客数',
   'footer.busuanziSiteUVUnit':'人次',
-  'feed.publishedIn':'发表于',
   'pagination.total':'共',
   'pagination.unit': '页',
   'title.minutes':'分钟',
@@ -42,6 +40,4 @@ export  const zhCn = {
   'search.searchLabelOne':'共找到 ',
   'search.searchLabelTwo': ' 篇文章',
   'search.placeholder': '输入标题或摘要关键字',
-  'feed.previous': '上一条动态',
-  'feed.next': '下一条动态',
 }
