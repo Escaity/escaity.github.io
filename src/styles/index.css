@@ -67,7 +67,7 @@
   border-color: rgb(var(--color-text-accent));
 }
 
-@import "remixicon/fonts/remixicon.css";
+@import "./remixicon-subset.css";
 @import "tocbot/dist/tocbot.css";
 @import "remark-aside.css";
 

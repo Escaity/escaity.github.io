@@ -105,7 +105,7 @@ jobs:
 ```
 まず、.sshというフォルダを作成し、ディレクトリの権限を700に変更します。次に、.sshにid_rsaというファイルを作成し、ファイルの権限を600に変更します。secrets.というプレフィックスがついている変数はGithubの設定ページで設定した環境変数です。こちらはリポジトリの"Settings"ページから"Security->Secrets and variables->Actions"のページで"New repository secret"ボタンを押下することで作成できます。  
 
-![Github_Actions_環境変数](/entries/20240528/GitHub_Actions_secret_setting.png)  
+![Github_Actions_環境変数](/entries/20240528/GitHub_Actions_secret_setting.webp)  
 
 <code>SSH_SECRET_KEY</code>にはサーバーで作成した秘密鍵の中身をコピーしたものを環境変数にペーストします。（秘密鍵ファイルの末尾に改行が入っているか確かめてください）
 ### 注意点

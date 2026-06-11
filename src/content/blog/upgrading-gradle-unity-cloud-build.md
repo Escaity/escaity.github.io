@@ -75,7 +75,7 @@ namespace Project.Editor
 
 Unity Cloudの　**DevOps > Build Automation > Configurations** から作成した**Target setup**の編集ページを開き、**Advanced settings**の**Script hooks**項目を編集します。
 **Pre-build script**項目には手順1で作成したスクリプトのパスを、**Pre-Export method**項目は手順2で作成したクラスの名前空間を含めたメソッド名を入力します。
-![システム設定](/entries/20240113/scripts_hooks.png)  
+![システム設定](/entries/20240113/scripts_hooks.webp)  
 設定を保存して完了です。  
 以上の設定を行い、Gradleがv6.7.1にアップグレードされた状態でクラウドビルドが出来ました。  
 ___

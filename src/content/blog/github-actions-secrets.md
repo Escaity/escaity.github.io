@@ -35,7 +35,7 @@ GitHub Actionsのワークフロー内で `${{ secrets.HOGEHOGE }}` という構
 
 私が設定していたのは **Environment secrets** でした。  
 
-<img src="/spinner.gif" data-src="/entries/20250824/build_env_empty.png" style="width:500px; margin: auto;">
+<img src="/entries/20250824/build_env_empty.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 そのため、GitHub Actionsが実行される際に「そんなSecretは存在しない」と判断され、環境変数が空のままビルドが進んでいました。(正常に値が反映されていれば "PUBLIC_GA_ID=***" のようにマスク表示されます。)
@@ -51,7 +51,7 @@ GitHub Actionsのワークフロー内で `${{ secrets.HOGEHOGE }}` という構
 5. **Secret** 欄に、環境変数の値を貼り付ける。
 6. **[Add secret]** をクリックして保存。
 
-<img src="/spinner.gif" data-src="/entries/20250824/github_actions_secret.png" style="width:600px; margin: auto;">
+<img src="/entries/20250824/github_actions_secret.webp" style="width:600px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 ---

@@ -30,7 +30,7 @@ category: Medicine
 
 さらに、症状がほぼ消失した状態である「臨床的寛解」や、内視鏡で見て大腸粘膜の炎症が治癒している「粘膜治癒」を達成した患者の割合も、青黛群がプラセボ群を大きく上回りました。
 
-<img src="/spinner.gif" data-src="/entries/20250922/171128-1_fig1.png" style="width:700px; margin: auto;">
+<img src="/entries/20250922/171128-1_fig1.webp" style="width:700px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 ---

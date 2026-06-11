@@ -19,10 +19,17 @@ function customRehypeLazyLoadImage() {
   return function (tree) {
     visit(tree, function (node) {
       if (node.tagName === 'img') {
-        node.properties['data-src'] = node.properties.src
-        node.properties.src = '/spinner.gif'
-        node.properties['data-alt'] = node.properties.alt
-        node.properties.alt = 'default'
+        if (node.properties['data-src']) {
+          node.properties.src = node.properties['data-src']
+          delete node.properties['data-src']
+        }
+        if (node.properties['data-alt']) {
+          node.properties.alt = node.properties['data-alt']
+          delete node.properties['data-alt']
+        }
+        node.properties.loading = 'lazy'
+        node.properties.decoding = 'async'
+        node.properties['data-fancybox'] = 'gallery'
       }
     })
   }

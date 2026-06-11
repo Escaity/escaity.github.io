@@ -18,7 +18,7 @@ export const site = {
   favicon: '/favicon.svg', // required
   description: 'AIと対話記録をメモしてます',
   author: "Escaity", // required
-  avatar: '/avatar.png', // required
+  avatar: '/avatar.webp', // required
   motto: 'True wealth is experience.',
   url: 'https://escaity.github.io',
   recentBlogSize: 5,

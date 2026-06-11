@@ -2,7 +2,17 @@
 import IndexPage from "src/layouts/IndexPage.astro";
 import {Search} from '../components/Search'
 import {getBlogPosts} from "../utils/posts";
-const posts = await getBlogPosts();
+const posts = (await getBlogPosts()).map(({collection, id, data}) => ({
+  collection,
+  id,
+  data: {
+    title: data.title,
+    description: data.description,
+    date: data.date,
+    category: data.category,
+    tags: data.tags,
+  },
+}));
 ---
 
 <IndexPage>

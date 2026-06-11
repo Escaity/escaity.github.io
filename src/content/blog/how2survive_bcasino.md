@@ -12,7 +12,7 @@ category: Game
 筆者自身も十数回と爆勝ち → 無一文のループを繰り返してきました。  
 この流れから学んだ経験を活かし、現在では **1Qaチップ** に到達しています。（ちなみに課金総額は **$2**、微課金勢です。）
 
-<img src="/spinner.gif" data-src="/entries/20250912/profile.png" style="width:500px; margin: auto;">
+<img src="/entries/20250912/profile.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 今回の記事ではチップを失うことなく、長くゲームを楽しむための「サバイバル術」について解説します。
@@ -26,13 +26,13 @@ category: Game
 
 下図のように検索条件を絞るとリーグポイントの高いクラブが出やすくなります。クラブ人数を微調整すると良いでしょう。  
 
-<img src="/spinner.gif" data-src="/entries/20250912/join_club.png" style="width:500px; margin: auto;">
+<img src="/entries/20250912/join_club.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 ### なぜクラブ参加が重要なのか？
 - **豊富なボーナス**: アクティブなクラブではジャックポットボーナスの配布やクラブイベントの達成によりチップを獲得できます。（下図のようにクラブメンバーのお裾分けをもらえます。）
 
-<img src="/spinner.gif" data-src="/entries/20250912/jackpot_bonus.png" style="width:500px; margin: auto;">
+<img src="/entries/20250912/jackpot_bonus.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 

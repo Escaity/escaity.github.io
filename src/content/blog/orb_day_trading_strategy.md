@@ -25,7 +25,7 @@ category: Financial
 | **利益確定** | 損切り幅（1R）の10倍、または当日の終値 |
 | **リスク管理** | 1回の取引損失を口座資金の1%以内 |
 
-<img src="/spinner.gif" data-src="/entries/20250822/orb_strategy.png" style="width:700px; margin: auto;">
+<img src="/entries/20250822/orb_strategy.webp" style="width:700px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 この研究の目的は、複雑なアルゴリズムではなく、基本的で再現性の高いORB戦略が、単純なバイ・アンド・ホールド戦略と比較して優位性を持つか否かを明らかにすることにある。
 
@@ -40,7 +40,7 @@ category: Financial
 | ORB戦略（QQQ） | **+675%** | **33%** (p=0.0025) | 市場方向性に依存せず安定 |
 | バイ・アンド・ホールド（QQQ） | +169% | なし | 市場リスクに依存 |
 
-<img src="/spinner.gif" data-src="/entries/20250822/result_strategy.png" style="width:600px; margin: auto;">
+<img src="/entries/20250822/result_strategy.webp" style="width:600px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 特筆すべきは、この戦略が生み出すリターンの質である。市場リスク（ベータ）との相関は統計的に有意ではなく、市場動向とは独立した収益源であることを示唆している。
 
