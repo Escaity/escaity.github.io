@@ -1,11 +1,9 @@
 import rss from '@astrojs/rss';
 import {site} from "../consts";
-import {getCollection} from "astro:content";
+import {getBlogPosts} from "../utils/posts";
 
 export async function GET(context) {
-  const blog = (await getCollection('blog')).filter(({data}) => {
-    return import.meta.env.PROD ? !data.draft : true
-  });
+  const blog = await getBlogPosts();
   return rss({
     title: site.title,
     description: site.description,

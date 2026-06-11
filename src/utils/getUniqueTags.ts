@@ -1,19 +1,11 @@
-import _ from 'lodash'
 import { dealLabel } from './dealLabel';
 
 const getUniqueTags = (posts) => {
-    let tags: string[] = [];
-    const filteredPosts = posts.filter(({data}) => {
-        return import.meta.env.PROD ? !data.draft : true
+    const tags = new Set<string>();
+    posts.forEach(post => {
+        dealLabel(post.data.tags).filter(Boolean).forEach((tag) => tags.add(tag));
     });
-    filteredPosts.forEach(post => {
-        tags = [...tags, ...dealLabel(post.data.tags)]
-            .filter(
-                (value: string, index: number, self: string[]) =>
-                    self.indexOf(value) === index
-            );
-    });
-    return _.compact(tags);
+    return Array.from(tags);
 };
 
 export default getUniqueTags;

@@ -1,15 +1,14 @@
-import _ from 'lodash'
 import { dealLabel } from './dealLabel'
 
 const getCountByCategory = (posts) => {
   let category: string[] = [];
-  const filteredPosts = posts.filter(({data}) => {
-    return import.meta.env.PROD ? !data.draft : true
+  posts.forEach(post => {
+    category = [...category, ...dealLabel(post.data.category)].filter(Boolean)
   });
-  filteredPosts.forEach(post => {
-    category = _.compact([...category, ..._.flattenDeep(dealLabel(post.data.category))])
-  });
-  let result = _.countBy(category)
+  let result = category.reduce((counts, item) => {
+    counts[item] = (counts[item] || 0) + 1;
+    return counts;
+  }, {})
   if(result['uncategorized']){
     let num = result['uncategorized']
     delete result['uncategorized']

@@ -1,15 +1,14 @@
 ---
 import PostView from '../components/PostView.astro'
 import IndexPage from '../layouts/IndexPage.astro'
-import {getCollectionByName} from "../utils/getCollectionByName";
 import {orderBySticky} from "../utils/orderBySticky";
+import {getBlogPosts} from "../utils/posts";
 import {site} from '../consts'
 import Pagination from "../components/Pagination.astro";
-import _ from 'lodash'
 
 let currentPage = 1
-let blogs = await getCollectionByName("blog");
-let totalPage = _.ceil(_.divide(blogs.length, site.postPageSize))
+let blogs = await getBlogPosts();
+let totalPage = Math.ceil(blogs.length / site.postPageSize)
 
 let sortedPosts = await orderBySticky(blogs);
 if (sortedPosts.length > site.postPageSize) {
@@ -31,4 +30,3 @@ if (sortedPosts.length > site.postPageSize) {
       /> : ''
   }
 </IndexPage>
-

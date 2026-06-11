@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Profile from '../components/Profile.astro'
 import BlogAside from '../components/BlogAside.astro'
+import PageAnalytics from '../components/PageAnalytics.astro'
 ---
 
 <html lang="ja">
@@ -26,24 +27,9 @@ import BlogAside from '../components/BlogAside.astro'
   </div>
   <Footer/>
 </main>
+<PageAnalytics/>
 </body>
 <script>
-
-  import { analytics } from '../utils/analytics';
-
-  // ページビューの自動追跡
-  analytics.trackPageView();
-
-  // 外部リンクの自動追跡
-  document.addEventListener('click', (event) => {
-    const target = event.target as HTMLElement;
-    const link = target.closest('a');
-
-    if (link && link.hostname !== window.location.hostname) {
-      analytics.trackOutboundLink(link.href, link.textContent?.trim());
-    }
-  });
-
   document.body.querySelectorAll("a").forEach(item => {
     item.setAttribute("rel", "nofollow noreferrer");
   });

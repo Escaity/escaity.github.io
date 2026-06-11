@@ -1,19 +1,18 @@
 import {h as _h, s as _s} from "hastscript";
 import {remove} from "unist-util-remove";
 import {visit} from "unist-util-visit";
-import {t} from '../i18n/utils.ts';
 const variants = new Set(["note", "tip", "caution", "danger"]);
 
 function defaultLabel(v) {
   switch (v) {
     case "note":
-      return  t('aside.note') || 'Note';
+      return "注記";
     case "tip":
-      return t('aside.tip') || 'Tip';
+      return "ヒント";
     case "caution":
-      return t('aside.caution') || 'Caution';
+      return "警告";
     case "danger":
-      return t('aside.danger') || 'Danger';
+      return "危険";
     default:
       return "";
   }

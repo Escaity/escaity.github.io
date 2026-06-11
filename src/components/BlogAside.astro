@@ -1,19 +1,13 @@
 ---
-import {getCollectionByName} from "../utils/getCollectionByName";
-import getCountByCategory from "../utils/getCountByCategory";
-import getPostArchivesByMonth from "../utils/getPostArchivesByMonth";
-import {t} from '../i18n/utils'
-const blogs = await getCollectionByName('blog')
-let categoryCount = getCountByCategory(blogs);
-const archives = getPostArchivesByMonth(blogs);
-const archiveLimit = 10;
+import {archiveLimit, getSidebarData} from "../utils/sidebarData";
+const {archives, categoryCount} = await getSidebarData();
 ---
 
 <div>
   {
     Object.keys(categoryCount).length > 0 && (
       <div class="aside-widget">
-        <i class="ri-folder-line menu-icon"/>{t('sidebar.categories')}
+        <i class="ri-folder-line menu-icon"/>カテゴリー
       </div>
     )
   }
@@ -24,7 +18,7 @@ const archiveLimit = 10;
         title={category + " (" + categoryCount[category] + ")"}
         href={"/category/" + category}
       >
-        {(category === 'uncategorized' ? t('sidebar.uncategorized') : category) + " (" + categoryCount[category] + ")"}
+        {(category === 'uncategorized' ? '未分類' : category) + " (" + categoryCount[category] + ")"}
       </a>
     ))
   }
@@ -34,7 +28,7 @@ const archiveLimit = 10;
     archives.length > 0 && (
       <div class="aside-widget">
         <i class="ri-archive-line menu-icon"/>
-        {t('sidebar.archive')}
+        アーカイブ
       </div>
     )
   }
@@ -55,7 +49,7 @@ const archiveLimit = 10;
   {
     archives.length > archiveLimit && (
       <a class="inline-block mt-2 border rounded-full py-1 px-4 text-sm hover:text-skin-active" href="/archive/1">
-        {t('sidebar.archiveMore')}
+        もっと見る
       </a>
     )
   }

@@ -1,7 +1,6 @@
 ---
 import {formatDate} from "../utils/formatDate";
 import {dealLabel} from "../utils/dealLabel";
-import {t} from '../i18n/utils'
 const {title, date, category, tags, lastModified = '', draft = false, readingTime = {}} = Astro.props
 ---
 
@@ -31,7 +30,7 @@ const {title, date, category, tags, lastModified = '', draft = false, readingTim
     {
       date && (
         <i class="ri-calendar-2-fill"/>
-        <div class="tag">{t('post.createdAt')}：{formatDate(date)}</div>
+        <div class="tag">作成日：{formatDate(date)}</div>
       )
     }
 
@@ -40,7 +39,7 @@ const {title, date, category, tags, lastModified = '', draft = false, readingTim
       lastModified && (
         <div class="divider-vertical"/>
         <i class="ri-calendar-check-fill"></i>
-        <div class="tag">{t('post.lastUpdated')}：{lastModified}</div>
+        <div class="tag">最終更新日：{lastModified}</div>
       )
     }
 
@@ -50,7 +49,7 @@ const {title, date, category, tags, lastModified = '', draft = false, readingTim
       <>
         <div class="divider-vertical"/>
         <i class="ri-git-pr-draft-line"/>
-        <div>{t('title.draft')}</div>
+        <div>下書き</div>
       </>
     }
 

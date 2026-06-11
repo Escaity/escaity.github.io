@@ -1,20 +1,11 @@
 import dayjs from 'dayjs';
-import { config, site } from '../consts';
+import { site } from '../consts';
 import { sortPostsByDate } from './sortPostsByDate';
 
 const formatArchiveLabel = (date) => {
   const month = Number(date.format('M'));
   const year = date.format('YYYY');
-
-  if (config.lang === 'ja') {
-    return `${month}月 ${year}`;
-  }
-
-  if (config.lang === 'zh-cn') {
-    return `${year}年${month}月`;
-  }
-
-  return date.format('MMM YYYY');
+  return `${month}月 ${year}`;
 };
 
 const getPostArchivesByMonth = (posts, pageSize = site.archivePageSize) => {

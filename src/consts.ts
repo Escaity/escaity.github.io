@@ -27,12 +27,10 @@ export const site = {
 }
 
 /**
- * lang {string} Default website language
  * codeFoldingStartLines {number}
  * ga {string|false}
  */
 export const config = {
-  lang: 'ja', // en | zh-cn
   codeFoldingStartLines: 16, // Need to re-run the project to take effect
   ga: true // If you want to integrate with Google Analytics, just enter your GA-ID here.
 }

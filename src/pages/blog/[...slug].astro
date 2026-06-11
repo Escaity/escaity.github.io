@@ -1,15 +1,12 @@
 ---
-import {getCollection, render} from 'astro:content';
+import {render} from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro'
 import PostTitle from "../../components/PostTitle.astro";
-import BlogFooter from '../../components/BlogFooter.astro'
-import {getCollectionByName} from "../../utils/getCollectionByName";
 import {sortPostsByDate} from "../../utils/sortPostsByDate";
+import {getBlogPosts} from "../../utils/posts";
 
 export async function getStaticPaths() {
-  const blogEntries = (await getCollection('blog')).filter(({data}) => {
-    return import.meta.env.PROD ? !data.draft : true
-  });
+  const blogEntries = await getBlogPosts();
   return blogEntries.map(entry => ({
     params: {slug: entry.id}, props: {entry,},
   }));
@@ -21,7 +18,7 @@ const {Content, remarkPluginFrontmatter} = await render(entry);
 const lastModified = remarkPluginFrontmatter.lastModified
 const readingTime = remarkPluginFrontmatter.readingTime
 
-const posts = await getCollectionByName("blog");
+const posts = await getBlogPosts();
 const sortPosts = sortPostsByDate(posts);
 
 const currentPostIndex = sortPosts.findIndex(
@@ -71,7 +68,6 @@ if (sortPosts[currentPostIndex + 1]) {
         )
       }
     </div>
-    <BlogFooter title={entry.data.title} url={entry.collection + '/' + entry.id} date={entry.data.date}></BlogFooter>
   </div>
 
 </BlogPost>

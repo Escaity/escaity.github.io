@@ -1,11 +1,10 @@
-import _ from 'lodash'
 export const dealLabel = (label) => {
-  if (_.isEmpty(label)) {
+  if (!label || (Array.isArray(label) && label.length === 0)) {
     return []
-  } else if (_.isString(label)) {
+  } else if (typeof label === 'string') {
     let arr = label.split(',')
     return [...arr]
-  } else if (_.isArray(label)) {
+  } else if (Array.isArray(label)) {
     return [...label]
   }
   return []
