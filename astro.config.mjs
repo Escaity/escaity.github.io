@@ -1,8 +1,9 @@
 import {defineConfig} from 'astro/config';
 import mdx from '@astrojs/mdx';
+import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import solid from '@astrojs/solid-js';
+import tailwindcss from "@tailwindcss/vite";
 import {remarkModifiedTime} from "./src/remarkPlugin/remark-modified-time.mjs";
 import {resetRemark} from "./src/remarkPlugin/reset-remark.js";
 import remarkDirective from "remark-directive";
@@ -31,7 +32,10 @@ export default defineConfig({
   site: 'https://escaity.github.io/',
   output: 'static',
   adapter: undefined,
-  integrations: [sitemap(), tailwind(), solid(), expressiveCode({
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  integrations: [sitemap(), solid(), expressiveCode({
     plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
     themes: ["github-dark", "github-light"],
     styleOverrides: {
@@ -41,7 +45,9 @@ export default defineConfig({
     themeCssSelector: (theme) => `[data-theme="${theme.type}"]`
   }), mdx()],
   markdown: {
-    remarkPlugins: [remarkModifiedTime, resetRemark, remarkDirective, remarkAsides({}) ],
-    rehypePlugins: [customRehypeLazyLoadImage],
+    processor: unified({
+      remarkPlugins: [remarkModifiedTime, resetRemark, remarkDirective, remarkAsides({})],
+      rehypePlugins: [customRehypeLazyLoadImage],
+    }),
   }
 });

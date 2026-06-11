@@ -1,11 +1,13 @@
-import {defineCollection, z} from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional().nullable(),
-    date: z.date(),
+    date: z.coerce.date(),
     tags: z.array(z.string()).or(z.string()).optional().nullable(),
     category: z.array(z.string()).or(z.string()).default('uncategorized').nullable(),
     sticky: z.number().default(0).nullable(),
@@ -19,11 +21,12 @@ const blog = defineCollection({
 });
 
 const feed = defineCollection({
+  loader: async () => [],
   schema: z.object({
-    date: z.date().or(z.string()).optional().nullable(),
+    date: z.coerce.date().or(z.string()).optional().nullable(),
     donate: z.boolean().default(true),
     comment: z.boolean().default(true),
-  })
-})
+  }),
+});
 
-export const collections = {blog, feed};
+export const collections = { blog, feed };

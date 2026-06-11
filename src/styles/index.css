@@ -1,11 +1,75 @@
 @import url('./github-markdown.css');
 
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+@theme {
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 720px;
+  --breakpoint-lg: 840px;
+  --breakpoint-xl: 960px;
+  --breakpoint-2xl: 1080px;
+}
+
+@utility text-skin-base {
+  color: rgb(var(--color-text));
+}
+
+@utility text-skin-active {
+  color: rgb(var(--color-text-active));
+}
+
+@utility text-skin-accent {
+  color: rgb(var(--color-text-accent));
+}
+
+@utility bg-skin-active {
+  background-color: rgb(var(--color-active));
+}
+
+@utility bg-skin-accent {
+  background-color: rgb(var(--color-accent));
+}
+
+@utility bg-skin-fill {
+  background-color: rgb(var(--color-fill));
+}
+
+@utility bg-skin-secondary {
+  background-color: rgb(var(--color-fill-secondary));
+}
+
+@utility bg-skin-card {
+  background-color: rgb(var(--color-card));
+}
+
+@utility bg-skin-modal {
+  background-color: rgb(var(--color-modal));
+}
+
+@utility decoration-skin-base {
+  text-decoration-color: rgb(var(--color-border));
+}
+
+@utility decoration-skin-active {
+  text-decoration-color: rgb(var(--color-text-active));
+}
+
+@utility border-skin-base {
+  border-color: rgb(var(--color-border));
+}
+
+@utility border-skin-normal {
+  border-color: rgb(var(--color-text));
+}
+
+@utility border-skin-accent {
+  border-color: rgb(var(--color-text-accent));
+}
+
 @import "remixicon/fonts/remixicon.css";
 @import "tocbot/dist/tocbot.css";
 @import "remark-aside.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @font-face {
   font-family: "firacode";
