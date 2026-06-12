@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import dayjs from 'dayjs';
+import {getGitCreatedAt} from "./gitContentDates";
 
 export const isVisiblePost = (post) => {
   return import.meta.env.PROD ? !post.data.draft : true;
@@ -7,9 +8,28 @@ export const isVisiblePost = (post) => {
 
 export const filterVisiblePosts = (posts) => posts.filter(isVisiblePost);
 
+const withResolvedDate = (post) => {
+  if (post.data.date) {
+    return post;
+  }
+
+  const fallbackDate = getGitCreatedAt(post.filePath);
+  if (!fallbackDate) {
+    throw new Error(`Unable to resolve a created date for blog post "${post.id}".`);
+  }
+
+  return {
+    ...post,
+    data: {
+      ...post.data,
+      date: fallbackDate,
+    },
+  };
+};
+
 export const getBlogPosts = async () => {
   const posts = await getCollection('blog');
-  return filterVisiblePosts(posts);
+  return filterVisiblePosts(posts).map(withResolvedDate);
 };
 
 export const sortPostsByDate = (posts) => {
