@@ -46,12 +46,12 @@ export const categories = [
   {
     name: "Blog",
     iconClass: "ri-draft-line",
-    href: "/blog/1",
+    href: "/",
   },
   {
     name: "Archive",
     iconClass: "ri-archive-line",
-    href: "/archive/1",
+    href: "/archive",
   },
   {
     name: "About",

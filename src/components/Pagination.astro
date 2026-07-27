@@ -12,10 +12,7 @@ if (totalPage === 1) {
   pager = [];
 } else if (totalPage <= 5) {
   pager = new Array(totalPage).fill(0).map((i, index) => index + 1);
-} else {
-  if (currentPage > totalPage) {
-    return
-  }
+} else if (currentPage <= totalPage) {
   let diffNextPages = 2 - (totalPage - currentPage);
 
   let diffPrevPages = currentPage - 1;

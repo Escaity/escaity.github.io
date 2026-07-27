@@ -79,7 +79,9 @@ const {frontmatter = {comment: false, donate: false, toc: false, mathjax: false,
     for (var i = 0; i < links.length; i++) {
       // 给每个链接标签添加 target 属性
       let names = links[i].getAttributeNames()
-      if (!names.includes('data-footnote-backref') && !names.includes('data-footnote-ref')) {
+      // 外部リンクのみ別タブ + nofollow(内部リンク・脚注はそのまま)
+      if (!names.includes('data-footnote-backref') && !names.includes('data-footnote-ref')
+        && links[i].host && links[i].host !== location.host) {
         links[i].setAttribute("target", "_blank");
         links[i].setAttribute("rel", "nofollow noreferrer");
       }

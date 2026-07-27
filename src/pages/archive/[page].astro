@@ -5,10 +5,26 @@ import { sortPostsByDate } from "src/utils/sortPostsByDate";
 import  {site} from "../../consts";
 import { getBlogPosts } from "../../utils/posts";
 import ArchiveList from "src/components/ArchiveList.astro";
-export async function getStaticPaths({ paginate }) {
-  let posts = await getBlogPosts();
-  posts = sortPostsByDate(posts);
-  return paginate(posts, { pageSize: site.archivePageSize });
+export async function getStaticPaths() {
+  const posts = sortPostsByDate(await getBlogPosts());
+  const totalPage = Math.ceil(posts.length / site.archivePageSize);
+
+  // 1ページ目は /archive (index.astro) が担うため、2ページ目以降のみ生成する
+  return Array.from({length: Math.max(totalPage - 1, 0)}, (_, index) => {
+    const pageNumber = index + 2;
+    const start = (pageNumber - 1) * site.archivePageSize;
+
+    return {
+      params: {page: String(pageNumber)},
+      props: {
+        page: {
+          currentPage: pageNumber,
+          lastPage: totalPage,
+          data: posts.slice(start, start + site.archivePageSize),
+        },
+      },
+    };
+  });
 }
 // 所有分页数据都将传递给 "page" 参数
 const { page } = Astro.props;
@@ -20,6 +36,6 @@ const { page } = Astro.props;
     currentPage={page.currentPage}
     totalPage={page.lastPage}
     prefixUrl="/archive/"
-    url={page.slug}
+    firstPageHref="/archive"
   />
 </IndexPage>

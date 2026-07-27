@@ -30,8 +30,11 @@ import PageAnalytics from '../components/PageAnalytics.astro'
 <PageAnalytics/>
 </body>
 <script>
+  // 外部リンクのみ nofollow を付与する(内部リンクに付けるとSEO上不利)
   document.body.querySelectorAll("a").forEach(item => {
-    item.setAttribute("rel", "nofollow noreferrer");
+    if (item.host && item.host !== location.host) {
+      item.setAttribute("rel", "nofollow noreferrer");
+    }
   });
 </script>
 </html>

@@ -99,33 +99,35 @@ menu {
 
 @layer base {
 
+  /* Catppuccin Latte */
   :root,
   html[data-theme="light"] {
-    --color-fill: 241, 241, 241;
-    --color-fill-secondary: 235, 238, 245;
-    --color-card: 241, 241, 241;
-    --color-active: 203, 223, 255;
-    --color-accent: 230, 239, 255;
-    --color-text: 80, 73, 69;
-    --color-text-active: 119, 174, 255;
-    --color-text-accent: 119, 174, 255;
-    --color-border: 104, 157, 106;
-    --color-border-active: 14, 192, 124;
-    --color-modal: 52, 58, 64;
+    --color-fill: 239, 241, 245; /* base */
+    --color-fill-secondary: 230, 233, 239; /* mantle */
+    --color-card: 239, 241, 245; /* base */
+    --color-active: 188, 192, 204; /* surface1 */
+    --color-accent: 204, 208, 218; /* surface0 */
+    --color-text: 76, 79, 105; /* text */
+    --color-text-active: 30, 102, 245; /* blue */
+    --color-text-accent: 114, 135, 253; /* lavender */
+    --color-border: 156, 160, 176; /* overlay0 */
+    --color-border-active: 23, 146, 153; /* teal */
+    --color-modal: 30, 30, 46; /* mocha base */
   }
 
+  /* Catppuccin Mocha */
   html[data-theme="dark"] {
-    --color-fill: 25, 30, 36;
-    --color-fill-secondary: 10, 13, 20;
-    --color-card: 40, 42, 54;
-    --color-active: 59, 74, 98;
-    --color-accent: 43, 54, 72;
-    --color-text: 249, 244, 227;
-    --color-text-active: 119, 174, 255;
-    --color-text-accent: 119, 174, 255;
-    --color-border: 214, 93, 14;
-    --color-border-active: 7, 102, 120;
-    --color-modal: 251, 251, 251;
+    --color-fill: 30, 30, 46; /* base */
+    --color-fill-secondary: 17, 17, 27; /* crust */
+    --color-card: 49, 50, 68; /* surface0 */
+    --color-active: 69, 71, 90; /* surface1 */
+    --color-accent: 49, 50, 68; /* surface0 */
+    --color-text: 205, 214, 244; /* text */
+    --color-text-active: 137, 180, 250; /* blue */
+    --color-text-accent: 180, 190, 254; /* lavender */
+    --color-border: 88, 91, 112; /* surface2 */
+    --color-border-active: 148, 226, 213; /* teal */
+    --color-modal: 239, 241, 245; /* latte base */
   }
 
   #sun-icon,
@@ -280,11 +282,11 @@ menu {
 ::-webkit-scrollbar {
   width: 10px;
   height: 16px;
-  background-color: #edede9;
+  background-color: rgb(var(--color-fill-secondary));
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #c0c4cc;
+  background-color: rgb(var(--color-border));
   border-radius: 4px;
 }
 
@@ -337,4 +339,31 @@ menu {
 /* fix mathjax style */
 .MathJax {
   text-align: left !important;
+}
+
+/* github-markdown.css のパレットを Catppuccin に上書き */
+html[data-theme="light"] .markdown-body {
+  --color-fg-default: #4c4f69; /* latte text */
+  --color-fg-muted: #6c6f85; /* latte subtext0 */
+  --color-fg-subtle: #9ca0b0; /* latte overlay0 */
+  --color-canvas-default: #eff1f5; /* latte base */
+  --color-canvas-subtle: #e6e9ef; /* latte mantle */
+  --color-border-default: #bcc0cc; /* latte surface1 */
+  --color-border-muted: #ccd0da; /* latte surface0 */
+  --color-accent-fg: #1e66f5; /* latte blue */
+  --color-accent-emphasis: #1e66f5;
+  --color-danger-fg: #d20f39; /* latte red */
+}
+
+html[data-theme="dark"] .markdown-body {
+  --color-fg-default: #cdd6f4; /* mocha text */
+  --color-fg-muted: #a6adc8; /* mocha subtext0 */
+  --color-fg-subtle: #6c7086; /* mocha overlay0 */
+  --color-canvas-default: #1e1e2e; /* mocha base */
+  --color-canvas-subtle: #181825; /* mocha mantle */
+  --color-border-default: #45475a; /* mocha surface1 */
+  --color-border-muted: #313244; /* mocha surface0 */
+  --color-accent-fg: #89b4fa; /* mocha blue */
+  --color-accent-emphasis: #89b4fa;
+  --color-danger-fg: #f38ba8; /* mocha red */
 }

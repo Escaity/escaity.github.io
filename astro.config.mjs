@@ -39,12 +39,16 @@ export default defineConfig({
   site: 'https://escaity.github.io/',
   output: 'static',
   adapter: undefined,
+  redirects: {
+    '/blog/1': '/',
+    '/archive/1': '/archive',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
   integrations: [sitemap(), solid(), expressiveCode({
     plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
-    themes: ["github-dark", "github-light"],
+    themes: ["catppuccin-mocha", "catppuccin-latte"],
     styleOverrides: {
       codeFontFamily: "firacode",
       uiFontFamily: "firacode",

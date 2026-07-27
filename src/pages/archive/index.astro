@@ -15,5 +15,5 @@ sortedPosts = sortedPosts.splice(0, site.archivePageSize);
 
 <IndexPage>
   <ArchiveList posts={sortedPosts} titleHover={false}/>
-  <Pagination currentPage={1} totalPage={totalPage} prefixUrl="/archive/"/>
+  <Pagination currentPage={1} totalPage={totalPage} prefixUrl="/archive/" firstPageHref="/archive"/>
 </IndexPage>
