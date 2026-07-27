@@ -146,7 +146,7 @@ menu {
 
   /* 导航栏的按钮样式 */
   .header-link-active {
-    @apply underline underline-offset-4 decoration-wavy decoration-skin-active;
+    @apply underline underline-offset-4 decoration-wavy decoration-skin-active text-skin-active;
   }
 
   .header-link-hover {
@@ -193,7 +193,8 @@ menu {
   }
 }
 
-* {
+/* 全要素対象だとページ内検索やアンカー移動まで遅くなるため html のみに限定 */
+html {
   scroll-behavior: smooth;
 }
 

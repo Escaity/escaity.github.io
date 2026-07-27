@@ -13,7 +13,7 @@ let sortedPosts = sortPostsByDate(posts);
 sortedPosts = sortedPosts.splice(0, site.archivePageSize);
 ---
 
-<IndexPage>
+<IndexPage title="アーカイブ">
   <ArchiveList posts={sortedPosts} titleHover={false}/>
   <Pagination currentPage={1} totalPage={totalPage} prefixUrl="/archive/" firstPageHref="/archive"/>
 </IndexPage>

@@ -48,13 +48,17 @@ function init() {
 }
 
 
-window.onload = () => {
-  init()
-};
+// window.onload だと画像読み込み完了までボタンが効かないため DOMContentLoaded で登録する
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
 
-// sync with system changes
+// sync with system changes (ユーザーが手動選択済みの場合は上書きしない)
 window.matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", ({matches: isDark}) => {
+    if (localStorage.getItem("theme")) return;
     themeValue = isDark ? "dark" : "light";
-    setPreference();
+    reflectPreference();
   });

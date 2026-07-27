@@ -25,7 +25,7 @@ const {title, date, category, tags, lastModified = '', draft = false, readingTim
   <!-- title -->
   <h1 class="break-all text-2xl mt-3 mb-2.5 font-bold">{title}</h1>
 
-  <div class="flex flex-wrap items-center my-2 space-x-2">
+  <div class="flex flex-wrap items-center my-2 gap-x-2 gap-y-1">
     <!-- date -->
     {
       date && (
@@ -40,6 +40,15 @@ const {title, date, category, tags, lastModified = '', draft = false, readingTim
         <div class="divider-vertical"/>
         <i class="ri-calendar-check-fill"></i>
         <div class="tag">最終更新日：{lastModified}</div>
+      )
+    }
+
+    <!-- reading time -->
+    {
+      readingTime?.minutes > 0 && (
+        <div class="divider-vertical"/>
+        <i class="ri-time-line"/>
+        <div class="tag">読了時間:約{Math.max(1, Math.ceil(readingTime.minutes))}分</div>
       )
     }
 

@@ -5,9 +5,22 @@ import {formatDate} from "../utils/formatDate.ts";
 const toSearchText = (value) => String(value || '').toLowerCase();
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+const countLabels = (posts, pick) => {
+  const counts = {};
+  posts.forEach(post => {
+    dealLabel(pick(post)).filter(label => label && label !== 'uncategorized').forEach(label => {
+      counts[label] = (counts[label] || 0) + 1;
+    });
+  });
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]);
+};
+
 export function Search(props) {
   const [inputVal, setInputVal] = createSignal('')
   const [resultPosts, setResultPosts] = createSignal([])
+
+  const categories = countLabels(props.posts, post => post.data.category);
+  const tags = countLabels(props.posts, post => post.data.tags);
 
   const handleChange = (e) => {
     const searchTerm = e.target.value;
@@ -59,6 +72,31 @@ export function Search(props) {
       </label>
 
       {resultPosts().length > 0 && <div class="my-2">合計<span class="px-2 font-bold text-skin-active">{resultPosts().length}</span>件の記事が見つかりました</div>}
+
+      {inputVal() !== '' && resultPosts().length === 0 &&
+        <div class="my-6">「{inputVal()}」に一致する記事は見つかりませんでした。別のキーワードをお試しください。</div>}
+
+      {inputVal() === '' &&
+        <div class="my-6">
+          {categories.length > 0 &&
+            <>
+              <div class="mb-2"><i class="ri-folder-3-line mr-1"/>カテゴリーから探す</div>
+              <div class="flex flex-wrap gap-2 mb-6">
+                {categories.map(([name, count]) =>
+                  <a class="border rounded-full py-1 px-3 text-sm hover:text-skin-active" href={'/category/' + name}>{name} ({count})</a>
+                )}
+              </div>
+            </>}
+          {tags.length > 0 &&
+            <>
+              <div class="mb-2"><i class="ri-price-tag-3-line mr-1"/>タグから探す</div>
+              <div class="flex flex-wrap gap-2">
+                {tags.map(([name, count]) =>
+                  <a class="border rounded-full py-1 px-3 text-sm hover:text-skin-active" href={'/tags/' + name}>{name} ({count})</a>
+                )}
+              </div>
+            </>}
+        </div>}
 
       <div class="my-4">
         {resultPosts().map(post =>

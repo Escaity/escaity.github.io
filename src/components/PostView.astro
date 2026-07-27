@@ -4,20 +4,13 @@ const {blog} = Astro.props;
 const {data, id} = blog
 ---
 
-<div class="shadow-md rounded-xl p-4 grid grid-cols-12 bg-skin-fill">
-  <div class="col-span-11">
-    <PostViewTitle
-      slug={`/blog/${id}`}
-      {...data}
-    >
-    </PostViewTitle>
-    <p class="break-all text-skin-base mb-2">
-      {
-        data.description ? data.description.substring(0,55) : ''
-      }
-    </p>
-  </div>
-  <div class="hover:bg-skin-active text-center rounded-xl col-span-1 bg-skin-accent">
-    <a class="text-skin-accent h-full flex justify-center items-center text-3xl ri-arrow-right-wide-fill" href={`/blog/${id}`}></a>
-  </div>
+<div class="relative shadow-md rounded-xl p-4 bg-skin-fill hover:shadow-lg transition-shadow">
+  <PostViewTitle
+    slug={`/blog/${id}`}
+    {...data}
+  >
+  </PostViewTitle>
+  <p class="break-all text-skin-base line-clamp-2">
+    {data.description || ''}
+  </p>
 </div>

@@ -30,7 +30,7 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 ---
 
-<IndexPage>
+<IndexPage title={`アーカイブ - ${page.currentPage}ページ目`}>
   <ArchiveList posts={page.data}/>
   <Pagination
     currentPage={page.currentPage}

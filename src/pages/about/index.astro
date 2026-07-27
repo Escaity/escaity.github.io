@@ -4,7 +4,7 @@ const posts = Object.values(import.meta.glob("./about.md", { eager: true }));
 let {Content, frontmatter} = posts[0];
 ---
 
-<IndexPage frontmatter={frontmatter}>
+<IndexPage frontmatter={frontmatter} title={frontmatter.title || 'About'}>
   <article class="markdown-body">
     <Content/>
   </article>

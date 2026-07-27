@@ -20,7 +20,7 @@ const tagPosts = getPostsByTag(posts, tag);
 const resultPosts = sortPostsByDate(tagPosts);
 ---
 
-<IndexPage>
+<IndexPage title={`タグ: ${tag}`}>
   <SearchTitle label={tag}/>
   <PostSummaryList posts={resultPosts}/>
 </IndexPage>

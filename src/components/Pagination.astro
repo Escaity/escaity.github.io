@@ -8,6 +8,9 @@ const {
   firstPageHref = `${prefixUrl}1`,
 } = Astro.props;
 
+// ページ番号 → リンク先(1ページ目のみ firstPageHref)
+const pageHref = (page) => (page === 1 ? firstPageHref : prefixUrl + page);
+
 if (totalPage === 1) {
   pager = [];
 } else if (totalPage <= 5) {
@@ -40,49 +43,60 @@ if (totalPage === 1) {
 
 ---
 
-<div class="flex items-center justify-center my-16 text-skin-base">
-  {
-    pager.length > 4 && currentPage > 1 && (
-      <a href={firstPageHref} style="font-size:18px;line-height:32px;">
-        <i class="ri-skip-left-line"></i>
-      </a>
-    )
-  }
-  <!-- 当前分页数据 -->
-  {
-    pager.map((i) =>
-      currentPage === i ? (
-        <a
-          class="text-skin-active"
-          href={i === 1 ? firstPageHref : prefixUrl + i}
-          style="line-height:32px;"
-        >
-          {i}
-        </a>
-      ) : (
-        <a href={i === 1 ? firstPageHref : prefixUrl + i} style="line-height:32px;">
-          {i}
+{pager.length > 0 &&
+  <nav class="flex items-center justify-center flex-wrap gap-2 my-16 text-skin-base" aria-label="ページネーション">
+    {
+      pager.length > 4 && currentPage > 1 && (
+        <a href={firstPageHref} title="最初のページ" aria-label="最初のページ">
+          <i class="ri-skip-left-line"></i>
         </a>
       )
-    )
-  }
-  {
-    pager.length > 4 && currentPage < totalPage && (
-      <a
-        href={prefixUrl + totalPage}
-        style="font-size:18px;line-height:32px;"
-      >
-        <i class="ri-skip-right-line"></i>
-      </a>
-    )
-  }
-  {totalPage > 5 && "全" + totalPage + "ページ"}
-</div>
+    }
+    {
+      currentPage > 1 && (
+        <a href={pageHref(currentPage - 1)} title="前のページ" aria-label="前のページ">
+          <i class="ri-arrow-left-s-fill"></i>
+        </a>
+      )
+    }
+    <!-- 当前分页数据 -->
+    {
+      pager.map((i) =>
+        currentPage === i ? (
+          <a
+            class="bg-skin-active font-bold"
+            href={pageHref(i)}
+            aria-current="page"
+          >
+            {i}
+          </a>
+        ) : (
+          <a href={pageHref(i)}>{i}</a>
+        )
+      )
+    }
+    {
+      currentPage < totalPage && (
+        <a href={pageHref(currentPage + 1)} title="次のページ" aria-label="次のページ">
+          <i class="ri-arrow-right-s-fill"></i>
+        </a>
+      )
+    }
+    {
+      pager.length > 4 && currentPage < totalPage && (
+        <a href={prefixUrl + totalPage} title="最後のページ" aria-label="最後のページ">
+          <i class="ri-skip-right-line"></i>
+        </a>
+      )
+    }
+    <span class="ml-2 text-sm">{currentPage} / {totalPage} ページ</span>
+  </nav>
+}
 
 <style>
   @reference "../styles/index.css";
 
   a {
-    @apply border mr-2 h-8 w-8 text-center leading-8 rounded cursor-pointer hover:text-skin-active;
+    @apply border rounded cursor-pointer hover:text-skin-active flex items-center justify-center w-11 h-11 text-base;
   }
 </style>

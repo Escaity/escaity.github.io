@@ -5,15 +5,16 @@ import Footer from '../components/Footer.astro';
 import Profile from '../components/Profile.astro'
 import BlogAside from '../components/BlogAside.astro'
 import PageAnalytics from '../components/PageAnalytics.astro'
+const {title, description} = Astro.props
 ---
 
 <html lang="ja">
-<BaseHead/>
+<BaseHead title={title} description={description}/>
 
 <body class="bg-skin-secondary relative">
 <Header/>
 <main class="container p-4 pt-20 text-skin-base pb-32 min-h-full relative" id="app">
-  <div class="grid grid-cols-4 gap-8">
+  <div class="xl:grid xl:grid-cols-4 xl:gap-8">
     <div>
       <div class="hidden xl:block space-y-6">
         <Profile></Profile>

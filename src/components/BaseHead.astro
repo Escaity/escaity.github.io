@@ -3,6 +3,11 @@ import '../styles/index.css'
 import {site} from "../consts";
 import GoogleAnalytics from './GoogleAnalytics.astro';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// ページ個別のタイトル・説明文(未指定時はサイト共通の値にフォールバック)
+const {title, description, ogType = 'website'} = Astro.props;
+const pageTitle = title ? `${title} | ${site.title}` : site.title;
+const pageDescription = description || site.description;
 ---
 <head>
   <!-- Google tag (gtag.js) -->
@@ -17,22 +22,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <link rel="canonical" href={canonicalURL}/>
 
   <!-- Primary Meta Tags -->
-  <meta name="title" content={site.title}/>
-  <meta name="description" content={site.description}/>
+  <meta name="title" content={pageTitle}/>
+  <meta name="description" content={pageDescription}/>
 
   <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website"/>
+  <meta property="og:type" content={ogType}/>
   <meta property="og:url" content={Astro.url}/>
-  <meta property="og:title" content={site.title}/>
-  <meta property="og:description" content={site.description}/>
+  <meta property="og:title" content={pageTitle}/>
+  <meta property="og:description" content={pageDescription}/>
   <meta property="og:image" content={new URL(site.avatar, Astro.site?.href).href}/>
-  <meta property="og:image:alt" content={site.description}/>
+  <meta property="og:image:alt" content={pageDescription}/>
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image"/>
   <meta property="twitter:url" content={Astro.url}/>
-  <meta property="twitter:title" content={site.title}/>
-  <meta property="twitter:description" content={site.description}/>
+  <meta property="twitter:title" content={pageTitle}/>
+  <meta property="twitter:description" content={pageDescription}/>
   <meta property="twitter:image" content={new URL(site.avatar, Astro.site?.href).href}/>
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -40,7 +45,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta name="msapplication-config" content="/browserconfig.xml"/>
   <meta name="theme-color" content="#ffffff"/>
 
-  <title>{site.title}</title>
+  <title>{pageTitle}</title>
   <script is:inline src="/toggle-theme.js"></script>
 
 </head>

@@ -9,12 +9,14 @@ const {title, date, slug, category, tags, sticky = false, draft = false} = Astro
   <div class="flex items-center">
     {sticky > 0 &&
       <div class="post-sticky select-none">固定</div>}
-    <a class="flex text-lg underline-offset-4 cursor-pointer decoration-skin-base decoration-wavy hover:text-skin-accent hover:decoration-sky-500 font-bold" href={slug}>
+    <!-- after疑似要素でカード全体をタップ領域にする(親カードが relative) -->
+    <a class="flex text-lg underline-offset-4 cursor-pointer decoration-skin-base decoration-wavy hover:text-skin-accent hover:decoration-sky-500 font-bold after:absolute after:inset-0" href={slug}>
       {title}
     </a>
   </div>
 
-  <div class="flex flex-wrap items-center my-2 space-x-2">
+  <!-- relative でカード全面リンクの上に重ね、カテゴリ・タグを個別にクリック可能にする -->
+  <div class="relative flex flex-wrap items-center my-2 gap-x-2 gap-y-1">
     <!-- date -->
     {
       date && (

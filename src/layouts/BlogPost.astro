@@ -10,12 +10,18 @@ const {frontmatter = {comment: false, donate: false, toc: false, mathjax: false,
 ---
 
 <html lang="ja">
-<BaseHead mathjax={frontmatter.mathjax} mermaid={frontmatter.mermaid}/>
+<BaseHead
+  title={frontmatter.title}
+  description={frontmatter.description}
+  ogType="article"
+  mathjax={frontmatter.mathjax}
+  mermaid={frontmatter.mermaid}
+/>
 
 <body class="bg-skin-secondary">
 <Header/>
 <main class="container p-4  pt-20 text-skin-base min-h-full pb-32 relative" id="app">
-  <div class="grid grid-cols-4 gap-8">
+  <div class="xl:grid xl:grid-cols-4 xl:gap-8">
     <div id="sidebar" class="hidden xl:block col-span-1 relative">
       <Profile></Profile>
       {

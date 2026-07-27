@@ -26,7 +26,7 @@ const categoryPosts = getPostsByCategory(posts, category);
 const resultPosts = sortPostsByDate(categoryPosts);
 ---
 
-<IndexPage>
+<IndexPage title={`カテゴリー: ${category}`}>
   <SearchTitle label={category}/>
   <PostSummaryList posts={resultPosts}/>
 </IndexPage>
