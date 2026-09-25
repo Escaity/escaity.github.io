@@ -14,9 +14,8 @@ export class AnalyticsManager {
     if (!this.config.enabled) return;
 
     this.gtag('config', this.config.gaId, {
-      page_path: url || window.location.pathname,
       page_title: document.title,
-      page_location: window.location.href
+      page_location: url ? new URL(url, window.location.origin).href : window.location.href
     });
   }
 
@@ -28,14 +27,6 @@ export class AnalyticsManager {
       event_label: parameters.label,
       value: parameters.value,
       ...parameters
-    });
-  }
-
-  trackOutboundLink(url: string, label?: string) {
-    this.trackEvent('click', {
-      event_category: 'outbound',
-      event_label: label || url,
-      transport_type: 'beacon'
     });
   }
 }

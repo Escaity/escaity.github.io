@@ -28,11 +28,9 @@ export const site = {
 
 /**
  * codeFoldingStartLines {number}
- * ga {string|false}
  */
 export const config = {
   codeFoldingStartLines: 16, // Need to re-run the project to take effect
-  ga: true // If you want to integrate with Google Analytics, just enter your GA-ID here.
 }
 
 /**

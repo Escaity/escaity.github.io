@@ -34,7 +34,6 @@ jobs:
 
       - name: Create .env
         run: |
-          echo "PUBLIC_GA_ID=${{ secrets.GA_ID }}"
           echo "PUBLIC_GA_ID=${{ secrets.GA_ID }}" >> .env
 
       - name: Build
