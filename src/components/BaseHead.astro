@@ -20,6 +20,8 @@ const pageDescription = description || site.description;
   <meta name="generator" content={Astro.generator}/>
   <!-- Canonical URL -->
   <link rel="canonical" href={canonicalURL}/>
+  <!-- RSS Autodiscovery -->
+  <link rel="alternate" type="application/rss+xml" title={site.title} href={new URL('rss.xml', Astro.site)}/>
 
   <!-- Primary Meta Tags -->
   <meta name="title" content={pageTitle}/>
