@@ -6,6 +6,8 @@ import MenuIcon from './MenuIcon.astro'
 import {site, categories, infoLinks} from '../consts';
 import AsideIcon from "./SidebarIcon.astro";
 const {archives, categoryCount} = await getSidebarData();
+// トップページではサイト名をページの見出し(h1)にする
+const SiteTitleTag = Astro.url.pathname === '/' ? 'h1' : 'div';
 ---
 
 <header class="fixed top-0 left-0 w-full bg-skin-fill text-skin-base z-10">
@@ -13,7 +15,9 @@ const {archives, categoryCount} = await getSidebarData();
     <div class="block xl:hidden">
       <MenuIcon></MenuIcon>
     </div>
-    <a class="ri-home-8-line text-2xl text-skin-accent p-4" href="/"> {site.title}</a>
+    <SiteTitleTag>
+      <a class="ri-home-8-line text-2xl text-skin-accent p-4" href="/"> {site.title}</a>
+    </SiteTitleTag>
     <div class="flex items-center">
       <div class="hidden xl:block">
         <div class="flex items-center space-x-5 pr-4">

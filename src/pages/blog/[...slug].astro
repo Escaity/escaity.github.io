@@ -4,6 +4,7 @@ import BlogPost from '../../layouts/BlogPost.astro'
 import PostTitle from "../../components/PostTitle.astro";
 import {sortPostsByDate} from "../../utils/sortPostsByDate";
 import {getBlogPosts} from "../../utils/posts";
+import {getGitContentDates} from "../../utils/gitContentDates";
 
 export async function getStaticPaths() {
   const blogEntries = await getBlogPosts();
@@ -17,6 +18,10 @@ const {Content, headings, remarkPluginFrontmatter} = await render(entry);
 
 const lastModified = remarkPluginFrontmatter.lastModified
 const readingTime = remarkPluginFrontmatter.readingTime
+
+// OGP / 構造化データ用の公開日・更新日(更新日は画面の「最終更新日」を表示する場合のみ)
+const publishedDate = new Date(entry.data.date);
+const modifiedDate = lastModified ? getGitContentDates(entry.filePath).lastCommittedAt : undefined;
 
 // モバイル用目次(サイドバーの tocbot と同じく h1〜h3 を対象)
 const tocHeadings = entry.data.toc ? headings.filter(heading => heading.depth <= 3) : [];
@@ -36,7 +41,12 @@ if (sortPosts[currentPostIndex + 1]) {
   nextPost = sortPosts[currentPostIndex + 1];
 }
 ---
-<BlogPost frontmatter={entry.data}>
+<BlogPost
+  frontmatter={entry.data}
+  ogImage={`/og/${entry.id}.png`}
+  publishedTime={publishedDate.toISOString()}
+  modifiedTime={modifiedDate?.toISOString()}
+>
   <div>
     <PostTitle slug={`/blog/${entry.id}`} {...entry.data} lastModified={lastModified} readingTime={readingTime}></PostTitle>
     <div class="divider-horizontal"></div>

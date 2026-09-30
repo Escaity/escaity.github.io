@@ -9,6 +9,7 @@
  * avatar {string} Avatar used in the profile
  * motto {string} used in the profile
  * url {string} Website link
+ * twitter {string} X(Twitter) handle used for twitter:creator
  * recentBlogSize {number} Number of recent articles displayed in the sidebar
  * archivePageSize {number} Number of articles on archive pages
  * postPageSize {number} Number of articles on blog pages
@@ -21,6 +22,7 @@ export const site = {
   avatar: '/avatar.webp', // required
   motto: 'True wealth is experience.',
   url: 'https://escaity.github.io',
+  twitter: '@v4utm1',
   recentBlogSize: 5,
   archivePageSize: 25,
   postPageSize: 6,

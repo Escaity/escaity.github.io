@@ -2,12 +2,55 @@
 import '../styles/index.css'
 import {site} from "../consts";
 import GoogleAnalytics from './GoogleAnalytics.astro';
+import {OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH} from '../utils/ogImage';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // ページ個別のタイトル・説明文(未指定時はサイト共通の値にフォールバック)
-const {title, description, ogType = 'website'} = Astro.props;
+const {
+  title,
+  description,
+  ogType = 'website',
+  ogImage = '/og.png',
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  categories = [],
+} = Astro.props;
 const pageTitle = title ? `${title} | ${site.title}` : site.title;
 const pageDescription = description || site.description;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+const isArticle = ogType === 'article';
+
+// 構造化データ(記事は BlogPosting、トップページは WebSite)
+const author = {'@type': 'Person', name: site.author, url: new URL('/about/', Astro.site).href};
+const jsonLd = isArticle
+  ? {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: pageDescription,
+    image: ogImageUrl,
+    url: canonicalURL.href,
+    mainEntityOfPage: canonicalURL.href,
+    datePublished: publishedTime,
+    dateModified: modifiedTime || publishedTime,
+    author,
+    publisher: author,
+    keywords: tags.length > 0 ? tags.join(',') : undefined,
+    articleSection: categories[0],
+    inLanguage: 'ja',
+  }
+  : Astro.url.pathname === '/'
+    ? {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: site.title,
+      description: site.description,
+      url: new URL('/', Astro.site).href,
+      author,
+      inLanguage: 'ja',
+    }
+    : undefined;
 ---
 <head>
   <!-- Google tag (gtag.js) -->
@@ -29,18 +72,28 @@ const pageDescription = description || site.description;
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content={ogType}/>
-  <meta property="og:url" content={Astro.url}/>
+  <meta property="og:site_name" content={site.title}/>
+  <meta property="og:locale" content="ja_JP"/>
+  <meta property="og:url" content={canonicalURL}/>
   <meta property="og:title" content={pageTitle}/>
   <meta property="og:description" content={pageDescription}/>
-  <meta property="og:image" content={new URL(site.avatar, Astro.site?.href).href}/>
-  <meta property="og:image:alt" content={pageDescription}/>
+  <meta property="og:image" content={ogImageUrl}/>
+  <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)}/>
+  <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)}/>
+  <meta property="og:image:alt" content={pageTitle}/>
+  {isArticle && publishedTime && <meta property="article:published_time" content={publishedTime}/>}
+  {isArticle && modifiedTime && <meta property="article:modified_time" content={modifiedTime}/>}
+  {isArticle && categories.map(category => <meta property="article:section" content={category}/>)}
+  {isArticle && tags.map(tag => <meta property="article:tag" content={tag}/>)}
 
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image"/>
-  <meta property="twitter:url" content={Astro.url}/>
-  <meta property="twitter:title" content={pageTitle}/>
-  <meta property="twitter:description" content={pageDescription}/>
-  <meta property="twitter:image" content={new URL(site.avatar, Astro.site?.href).href}/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:creator" content={site.twitter}/>
+  <meta name="twitter:title" content={pageTitle}/>
+  <meta name="twitter:description" content={pageDescription}/>
+  <meta name="twitter:image" content={ogImageUrl}/>
+
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")}/>}
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="msapplication-TileColor" content="#da532c"/>
