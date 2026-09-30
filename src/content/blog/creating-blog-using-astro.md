@@ -2,8 +2,8 @@
 title: "Astroでブログ作ってみた"
 date: 2024-01-07
 description: 最初のAstro記事です。
-tags: ["Astro", "ブログ"]
-category: 雑記
+tags: ["Astro", "blog"]
+category: Tech
 ---
 
 [初めてのAstroブログ](https://docs.astro.build/ja/tutorial/0-introduction/ )という公式チュートリアル記事をほとんど真似して作ってみました。（デザインは所々変えてます。）タグ機能がお手軽に作れて良い。

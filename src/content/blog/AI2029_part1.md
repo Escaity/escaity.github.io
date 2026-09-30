@@ -3,7 +3,7 @@ title: "AI 2029 前編: 知能・資本・国家が圧縮される未来"
 date: 2026-06-10
 description: "AIは半導体、電力、株式市場をどう変えるのか"
 tags: ["AI"]
-category: Tech
+category: AI
 ---
 
 ### AIを、モデル性能だけで語れない時期が来ている。

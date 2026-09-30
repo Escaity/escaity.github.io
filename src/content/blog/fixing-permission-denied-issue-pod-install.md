@@ -2,8 +2,8 @@
 title: "pod installで EACCES - Permission denied でインストールできない場合の対処方法"
 date: 2024-01-31
 description: "pod instal で管理者権限関連のエラーが発生した時の対処法について解説します。"
-tags: ["Unity"]
-category: エラー
+tags: ["Unity", "error"]
+category: Tech
 ---
 
 iOSビルドに広告関連のSDKが入っている場合podを導入する必要があるのですが、podをアップデートした際にpermissionが変更されてしまったのか、下記のようなエラーが発生していました。

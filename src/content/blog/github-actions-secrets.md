@@ -2,7 +2,7 @@
 title: "GitHub Pages × AstroブログにGA4導入時のハマりポイント"
 date: 2025-08-24
 description: "Github PagesにデプロイしたブログにGAIDをsecretに設定する時に手詰まった箇所について解説"
-tags: ["blog", "github"]
+tags: ["blog", "GitHub"]
 category: Tech
 ---
 

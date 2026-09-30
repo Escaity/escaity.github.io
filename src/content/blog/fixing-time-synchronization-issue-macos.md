@@ -2,7 +2,7 @@
 title: "MacOSで時刻同期がずれた時の対処法"
 date: 2024-01-11
 description: "MacOSで時刻同期がずれた時にする2つの対処方法を解説します。"
-tags: ["Mac"]
+tags: ["macOS"]
 category: Tech
 ---
 

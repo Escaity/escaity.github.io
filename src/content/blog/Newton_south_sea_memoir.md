@@ -3,7 +3,7 @@ title: "我、天体の運行を計算し得れども——アイザック・ニ
 date: 2026-07-08
 description: "もしアイザック・ニュートンが、南海泡沫事件の一年を手記に残していたなら・・・"
 tags: ["stock"]
-category: Biography
+category: Finance
 ---
 
 

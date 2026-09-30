@@ -3,7 +3,7 @@ title: "知ってる曲が踊り出す ― Jersey Club Remix 5選"
 date: 2025-09-26
 description: "Jersey Club Remixの魅力を5曲を通して紹介！！"
 tags: ["jersey club"]
-category: Music
+category: 雑記
 ---
 
 いつものプレイリスト、聴き慣れた好きな曲。  

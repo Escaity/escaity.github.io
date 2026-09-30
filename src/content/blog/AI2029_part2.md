@@ -3,7 +3,7 @@ title: "AI 2029 後編: 知能・資本・国家が圧縮される未来"
 date: 2026-06-11
 description: "サイバー、暗号資産、米中競争の分岐点"
 tags: ["AI"]
-category: Tech
+category: AI
 ---
 
 ### AIは、便利な業務ツールであると同時に、攻撃者の能力増幅装置でもある。

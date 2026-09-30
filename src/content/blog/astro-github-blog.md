@@ -2,7 +2,7 @@
 title: "Astro + GitHubでブログを自動更新！  "
 date: 2025-06-29
 description: "Github Actionを利用した自動デプロイ手順を解説します"
-tags: ["web", "github"]
+tags: ["web", "GitHub"]
 category: Tech
 ---
 

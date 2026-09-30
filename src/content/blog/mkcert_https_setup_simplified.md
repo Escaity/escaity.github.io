@@ -2,7 +2,7 @@
 title: "ローカル開発をHTTPS対応に！Vite環境にmkcert導入する！！"
 date: 2025-06-28
 description: "ローカルHTTPS化を簡単に行えるツール「mkcert」の使い方と注意点を紹介"
-tags: ["Web", "Vite"]
+tags: ["web", "Vite"]
 category: Tech
 ---
 

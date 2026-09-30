@@ -3,7 +3,7 @@ title: "デイトレード戦略の有効性検証：ORB戦略が示す驚異的
 date: 2025-08-22
 description: "論文「Can Day Trading Really Be Profitable?」の内容を解説"
 tags: ["trading", "thesis"]
-category: Financial
+category: Finance
 ---
 
 ## はじめに

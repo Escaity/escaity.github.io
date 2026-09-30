@@ -3,7 +3,7 @@ title: "仮想通貨市場を飲み込んだ24時間 ― 190億ドル清算事�
 date: 2025-11-08
 description: "2025年10月フラッシュクラッシュ：市場を壊したのは誰か？"
 tags: ["crypto"]
-category: Financial
+category: Finance
 ---
 
 ## 0. 崩壊の序章 ― 忍び寄る「脆弱性の連鎖」

@@ -3,7 +3,7 @@ title: "天才か、黒幕か？Jane Street Capitalが43億ドルを稼いだ「
 date: 2025-09-03
 description: "ウォール街で最も謎に包まれたクオンツファーム、市場操作事件の核心に迫る"
 tags: ["news"]
-category: Financial
+category: Finance
 ---
 
 # 
