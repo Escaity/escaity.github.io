@@ -1,9 +1,18 @@
-import {createSignal} from "solid-js";
+import {createSignal, onMount} from "solid-js";
 import {dealLabel} from "../utils/dealLabel.ts"
 import {formatDate} from "../utils/formatDate.ts";
 
 const toSearchText = (value) => String(value || '').toLowerCase();
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeHtml = (value) => String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+// タイトル等の一致箇所を強調した HTML を返す(元の文字列はエスケープしてから強調する)
+const highlight = (text, searchTerm) => {
+  const escapedText = escapeHtml(text);
+  if (!searchTerm) return escapedText;
+  const reg = new RegExp(escapeRegExp(escapeHtml(searchTerm)), 'gi');
+  return escapedText.replace(reg, (match) => `<mark>${match}</mark>`);
+};
 
 const countLabels = (posts, pick) => {
   const counts = {};
@@ -15,46 +24,86 @@ const countLabels = (posts, pick) => {
   return Object.entries(counts).sort((a, b) => b[1] - a[1]);
 };
 
+// Pagefind の索引は本番ビルド時(astro build && pagefind)にだけ生成される。
+// 読み込めない環境(astro dev など)ではタイトル・概要の簡易検索にフォールバックする。
+const PAGEFIND_URL = '/pagefind/pagefind.js';
+let pagefindPromise;
+const loadPagefind = () => {
+  pagefindPromise ??= import(/* @vite-ignore */ PAGEFIND_URL).catch(() => null);
+  return pagefindPromise;
+};
+
 export function Search(props) {
   const [inputVal, setInputVal] = createSignal('')
   const [resultPosts, setResultPosts] = createSignal([])
+  let latestSearchId = 0;
 
   const categories = countLabels(props.posts, post => post.data.category);
   const tags = countLabels(props.posts, post => post.data.tags);
+  const postsByUrl = new Map(props.posts.map(post => [`/${post.collection}/${post.id}/`, post]));
 
-  const handleChange = (e) => {
-    const searchTerm = e.target.value;
+  const searchByTitleAndDescription = (searchTerm) => {
     const normalizedSearchTerm = toSearchText(searchTerm);
-
-    setInputVal(searchTerm)
-    if (searchTerm === '') {
-      setResultPosts([])
-    } else {
-      let filterBlogs = props.posts.filter(post =>
+    return props.posts
+      .filter(post =>
         toSearchText(post.data.title).includes(normalizedSearchTerm)
         || toSearchText(post.data.description).includes(normalizedSearchTerm)
       )
-      const reg = new RegExp(escapeRegExp(searchTerm), 'gi')
-      const highlightedBlogs = filterBlogs.map((blog) => {
-        const data = {...blog.data};
-        data.title = data.title.replace(reg, (match) => {
-          return `<span class="text-skin-active font-bold">${match}</span>`
-        })
-        if (data.description) {
-          data.description = data.description.replace(reg, (match) => {
-            return `<span class="text-skin-active font-bold">${match}</span>`
-          })
-        } else {
-          data.description = ''
-        }
-        return {...blog, data}
-      })
-      setResultPosts(highlightedBlogs)
+      .map(post => ({post, excerpt: highlight(post.data.description, searchTerm)}));
+  };
+
+  const searchFullText = async (pagefind, searchTerm) => {
+    const search = await pagefind.search(searchTerm);
+    const results = await Promise.all(search.results.slice(0, 30).map(result => result.data()));
+    return results
+      .map(result => ({post: postsByUrl.get(result.url.replace(/\/?$/, '/')), excerpt: result.excerpt}))
+      .filter(result => result.post);
+  };
+
+  const runSearch = async (searchTerm) => {
+    const searchId = ++latestSearchId;
+    if (searchTerm.trim() === '') {
+      setResultPosts([]);
+      return;
     }
-  }
+    const pagefind = await loadPagefind();
+    const results = pagefind
+      ? await searchFullText(pagefind, searchTerm)
+      : searchByTitleAndDescription(searchTerm);
+    // 入力中に古い検索結果が後から返ってきた場合は捨てる
+    if (searchId === latestSearchId) {
+      setResultPosts(results);
+    }
+  };
+
+  // 検索語を ?q= に反映して、結果ページを URL で共有・再訪できるようにする
+  const syncQueryToUrl = (searchTerm) => {
+    const url = new URL(window.location.href);
+    if (searchTerm) {
+      url.searchParams.set('q', searchTerm);
+    } else {
+      url.searchParams.delete('q');
+    }
+    history.replaceState(null, '', url);
+  };
+
+  const handleChange = (e) => {
+    const searchTerm = e.target.value;
+    setInputVal(searchTerm);
+    syncQueryToUrl(searchTerm);
+    runSearch(searchTerm);
+  };
+
+  onMount(() => {
+    const initialQuery = new URLSearchParams(window.location.search).get('q') || '';
+    if (initialQuery) {
+      setInputVal(initialQuery);
+      runSearch(initialQuery);
+    }
+  });
 
   return (
-    <div>
+    <div class="[&_mark]:bg-transparent [&_mark]:text-skin-active [&_mark]:font-bold">
       <label class="relative block">
         <span class="absolute inset-y-0 flex items-center pl-2 opacity-75">
           <i class="ri-search-line text-skin-active ml-1"></i>
@@ -62,9 +111,9 @@ export function Search(props) {
         <input
           id="search-input"
           class="block w-full rounded border border-opacity-40 bg-skin-fill text-skin-base py-3 pl-10 pr-3 placeholder:italic placeholder:text-opacity-75 focus:border-skin-accent focus:outline-none"
-          placeholder="タイトルまたは概要のキーワードを入力"
-          type="text"
-          name="search"
+          placeholder="キーワードで記事の本文まで検索"
+          type="search"
+          name="q"
           value={inputVal()}
           onInput={handleChange}
           autofocus
@@ -99,36 +148,36 @@ export function Search(props) {
         </div>}
 
       <div class="my-4">
-        {resultPosts().map(post =>
+        {resultPosts().map(({post, excerpt}) =>
           <>
             <a
               class="text-xl underline-offset-4 decoration-skin-base decoration-wavy hover:underline hover:decoration-sky-500 font-bold"
-              href={'/' + post.collection + '/' + post.id} innerHTML={post.data.title}>
+              href={'/' + post.collection + '/' + post.id} innerHTML={highlight(post.data.title, inputVal())}>
             </a>
-            <div class="flex items-center">
+            <div class="flex items-center flex-wrap">
               {post.data.date ?
-                <div class="flex items-center cursor-pointer">
+                <div class="flex items-center">
                   <i class="ri-calendar-2-fill mr-1"/>
                   <div class="tag">{formatDate(post.data.date)}</div>
                 </div> : ''}
 
-              {dealLabel(post.data.category).filter(item => item !== 'uncategorized').map((categoryName, categoryNameIndex) => (
-                <div class="flex  items-center  cursor-pointer">
+              {dealLabel(post.data.category).filter(item => item !== 'uncategorized').map((categoryName) => (
+                <div class="flex items-center">
                   <div class="divider-vertical"/>
                   <i class="ri-folder-2-fill mr-1"/>
                   <a href={"/category/" + categoryName}>{categoryName}</a>
                 </div>
               ))}
 
-              {dealLabel(post.data.tags).map((tagName, tagIndex) => (
-                <div class="flex  items-center  cursor-pointer">
+              {dealLabel(post.data.tags).map((tagName) => (
+                <div class="flex items-center">
                   <div class="divider-vertical"/>
                   <i class="ri-price-tag-3-fill mr-1"/>
                   <a href={"/tags/" + tagName}>{tagName}</a>
                 </div>
               ))}
             </div>
-            <p class="break-all mb-4" innerHTML={post.data.description}></p>
+            <p class="break-all mb-4" innerHTML={excerpt}></p>
           </>
         )}
       </div>

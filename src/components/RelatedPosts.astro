@@ -1,0 +1,30 @@
+---
+import {formatDate} from "../utils/formatDate";
+
+const {posts} = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <section aria-labelledby="related-posts-heading">
+      <h2 id="related-posts-heading" class="flex items-center font-bold mb-3">
+        <i class="ri-article-line menu-icon"/>関連記事
+      </h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        {
+          posts.map((post) => (
+            <a
+              class="flex flex-col rounded-xl p-4 shadow-md bg-skin-fill hover:shadow-lg hover:text-skin-accent transition-shadow"
+              href={`/blog/${post.id}`}
+            >
+              <div class="font-bold line-clamp-3">{post.data.title}</div>
+              <div class="mt-auto pt-2 text-sm opacity-75">
+                <i class="ri-calendar-2-fill mr-1"/>{formatDate(post.data.date)}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  )
+}

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "npm-check-updates": "^22.2.3",
+    "pagefind": "^1.5.2",
     "sass": "^1.100.0"
   },
   "overrides": {

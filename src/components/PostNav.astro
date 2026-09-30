@@ -1,0 +1,35 @@
+---
+// 記事下の前後記事ナビ(左: 1 つ古い記事 / 右: 1 つ新しい記事)
+const {prevPost, nextPost} = Astro.props;
+---
+
+{
+  (prevPost || nextPost) && (
+    <nav class="grid gap-4 sm:grid-cols-2" aria-label="前後の記事">
+      {
+        prevPost && (
+          <a class="post-nav-card" href={`/blog/${prevPost.id}`}>
+            <div class="text-sm opacity-75"><i class="ri-arrow-left-s-fill"/>前の記事</div>
+            <div class="font-bold line-clamp-2">{prevPost.data.title}</div>
+          </a>
+        )
+      }
+      {
+        nextPost && (
+          <a class="post-nav-card text-right sm:col-start-2" href={`/blog/${nextPost.id}`}>
+            <div class="text-sm opacity-75">次の記事<i class="ri-arrow-right-s-fill"/></div>
+            <div class="font-bold line-clamp-2">{nextPost.data.title}</div>
+          </a>
+        )
+      }
+    </nav>
+  )
+}
+
+<style>
+  @reference "../styles/index.css";
+
+  .post-nav-card {
+    @apply block rounded-xl p-4 shadow-md bg-skin-fill transition-shadow hover:shadow-lg hover:text-skin-accent;
+  }
+</style>

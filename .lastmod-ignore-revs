@@ -1,0 +1,8 @@
+# 記事の「最終更新日」の計算から除外するコミット(記事内容の更新ではない一括変更)
+# 1 行 1 コミットの完全なハッシュ。src/utils/gitContentDates.ts が読み込む。
+
+# Improve page load performance: 記事内画像の webp 化・lazy 属性付与
+ba658e3c957845cbef8ee041d7d6a6ef47f108f0
+
+# カテゴリ・タグの表記統一: frontmatter の category / tags のみ変更
+7b5229f9e94eb770278fa36fd5e8714b70dcf3d0

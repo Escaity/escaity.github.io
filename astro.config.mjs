@@ -42,6 +42,15 @@ export default defineConfig({
   redirects: {
     '/blog/1': '/',
     '/archive/1': '/archive',
+    // カテゴリ・タグ統合前の URL(大文字小文字だけが違う web/GitHub は同名ディレクトリと衝突するため対象外)
+    '/category/Financial': '/category/Finance',
+    '/category/Biography': '/category/Finance',
+    '/category/Medicine': '/category/雑記',
+    '/category/Game': '/category/雑記',
+    '/category/Music': '/category/雑記',
+    '/category/エラー': '/tags/error',
+    '/tags/ブログ': '/tags/blog',
+    '/tags/Mac': '/tags/macOS',
   },
   vite: {
     plugins: [tailwindcss()],

@@ -1,0 +1,57 @@
+---
+const {title, url} = Astro.props;
+const shareUrl = new URL(url);
+const xShareHref = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl.href)}`;
+const hatenaHref = `https://b.hatena.ne.jp/entry/${shareUrl.protocol === "https:" ? "s/" : ""}${shareUrl.host}${shareUrl.pathname}`;
+---
+
+<div class="flex flex-wrap items-center gap-2" data-pagefind-ignore>
+  <span class="text-sm mr-1">この記事をシェア</span>
+  <a class="share-btn" href={xShareHref} target="_blank" rel="noopener noreferrer" title="X でシェア" aria-label="X でシェア">
+    <i class="ri-twitter-x-fill"/>
+  </a>
+  <a class="share-btn font-bold" href={hatenaHref} target="_blank" rel="noopener noreferrer" title="はてなブックマークに追加" aria-label="はてなブックマークに追加">
+    B!
+  </a>
+  <button type="button" class="share-btn" id="copy-link-btn" data-url={shareUrl.href} title="リンクをコピー" aria-label="リンクをコピー">
+    <i class="ri-links-line"/>
+  </button>
+  <button type="button" class="share-btn hidden" id="native-share-btn" data-url={shareUrl.href} data-title={title} title="共有" aria-label="共有">
+    <i class="ri-share-forward-line"/>
+  </button>
+</div>
+
+<style>
+  @reference "../styles/index.css";
+
+  .share-btn {
+    @apply flex items-center justify-center w-10 h-10 border rounded-full cursor-pointer hover:text-skin-active;
+  }
+</style>
+
+<script>
+  const copyButton = document.getElementById("copy-link-btn");
+  copyButton?.addEventListener("click", async () => {
+    const icon = copyButton.querySelector("i");
+    try {
+      await navigator.clipboard.writeText(copyButton.dataset.url);
+      icon.className = "ri-check-line";
+      copyButton.setAttribute("aria-label", "コピーしました");
+      setTimeout(() => {
+        icon.className = "ri-links-line";
+        copyButton.setAttribute("aria-label", "リンクをコピー");
+      }, 2000);
+    } catch {
+      window.prompt("この URL をコピーしてください", copyButton.dataset.url);
+    }
+  });
+
+  // Web Share API に対応した端末(主にスマホ)でのみ OS の共有メニューボタンを出す
+  const nativeShareButton = document.getElementById("native-share-btn");
+  if (nativeShareButton && navigator.share) {
+    nativeShareButton.classList.remove("hidden");
+    nativeShareButton.addEventListener("click", () => {
+      navigator.share({title: nativeShareButton.dataset.title, url: nativeShareButton.dataset.url}).catch(() => {});
+    });
+  }
+</script>

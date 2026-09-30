@@ -5,6 +5,10 @@ import PostTitle from "../../components/PostTitle.astro";
 import {sortPostsByDate} from "../../utils/sortPostsByDate";
 import {getBlogPosts} from "../../utils/posts";
 import {getGitContentDates} from "../../utils/gitContentDates";
+import {getRelatedPosts} from "../../utils/relatedPosts";
+import ShareButtons from "../../components/ShareButtons.astro";
+import PostNav from "../../components/PostNav.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getBlogPosts();
@@ -33,13 +37,11 @@ const sortPosts = sortPostsByDate(posts);
 const currentPostIndex = sortPosts.findIndex(
   (postItem) => postItem.id === entry.id
 );
-let prevPost, nextPost
-if (sortPosts[currentPostIndex - 1]) {
-  prevPost = sortPosts[currentPostIndex - 1];
-}
-if (sortPosts[currentPostIndex + 1]) {
-  nextPost = sortPosts[currentPostIndex + 1];
-}
+// 日付の新しい順に並んでいるので、前の記事(古い)は +1、次の記事(新しい)は -1
+const prevPost = sortPosts[currentPostIndex + 1];
+const nextPost = sortPosts[currentPostIndex - 1];
+
+const relatedPosts = getRelatedPosts(posts, entry);
 ---
 <BlogPost
   frontmatter={entry.data}
@@ -47,59 +49,35 @@ if (sortPosts[currentPostIndex + 1]) {
   publishedTime={publishedDate.toISOString()}
   modifiedTime={modifiedDate?.toISOString()}
 >
-  <div>
-    <PostTitle slug={`/blog/${entry.id}`} {...entry.data} lastModified={lastModified} readingTime={readingTime}></PostTitle>
-    <div class="divider-horizontal"></div>
-    {
-      tocHeadings.length >= 2 && (
-        <details class="xl:hidden mb-6 rounded-lg shadow-md bg-skin-card px-4 py-2">
-          <summary class="cursor-pointer select-none font-bold">
-            <i class="ri-list-check menu-icon"/>目次
-          </summary>
-          <ol class="mt-2 text-sm">
-            {
-              tocHeadings.map(heading => (
-                <li style={`padding-left: ${heading.depth - tocMinDepth}rem`}>
-                  <a class="block py-1 hover:text-skin-active" href={`#${heading.slug}`}>{heading.text}</a>
-                </li>
-              ))
-            }
-          </ol>
-        </details>
-      )
-    }
-    <article class="markdown-body">
-      <Content/>
-    </article>
-    <div class="divider-horizontal"></div>
-    <div class="h-8 text-skin-base">
+  <div class="space-y-8">
+    <!-- 全文検索(Pagefind)のインデックス対象はタイトルと本文のみ -->
+    <div data-pagefind-body>
+      <PostTitle slug={`/blog/${entry.id}`} {...entry.data} lastModified={lastModified} readingTime={readingTime}></PostTitle>
+      <div class="divider-horizontal"></div>
       {
-        prevPost ? (
-          <a
-            class="truncate  w-auto max-w-[40%] float-left"
-            href={'/' + prevPost.collection + '/' + prevPost.id}
-            title={prevPost.data.title}
-          >
-            <i class="ri-arrow-left-s-fill"/>
-            {prevPost.data.title}
-          </a>
-        ) : (
-          <div/>
+        tocHeadings.length >= 2 && (
+          <details class="xl:hidden mb-6 rounded-lg shadow-md bg-skin-card px-4 py-2" data-pagefind-ignore>
+            <summary class="cursor-pointer select-none font-bold">
+              <i class="ri-list-check menu-icon"/>目次
+            </summary>
+            <ol class="mt-2 text-sm">
+              {
+                tocHeadings.map(heading => (
+                  <li style={`padding-left: ${heading.depth - tocMinDepth}rem`}>
+                    <a class="block py-1 hover:text-skin-active" href={`#${heading.slug}`}>{heading.text}</a>
+                  </li>
+                ))
+              }
+            </ol>
+          </details>
         )
       }
-      {
-        nextPost ? (
-          <div class="flex item-center float-right w-auto max-w-[40%] text-right">
-            <a class="truncate " href={'/' + nextPost.collection + '/' + nextPost.id} title={nextPost.data.title}>
-              {nextPost.data.title}
-            </a>
-            <i class="ri-arrow-right-s-fill float-right"/>
-          </div>
-        ) : (
-          <div/>
-        )
-      }
+      <article class="markdown-body">
+        <Content/>
+      </article>
     </div>
+    <ShareButtons title={entry.data.title} url={new URL(`/blog/${entry.id}/`, Astro.site).href}/>
+    <PostNav prevPost={prevPost} nextPost={nextPost}/>
+    <RelatedPosts posts={relatedPosts}/>
   </div>
-
 </BlogPost>
