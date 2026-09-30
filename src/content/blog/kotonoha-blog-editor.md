@@ -1,6 +1,6 @@
 ---
 title: AstroブログエディターをAstra君と作った！！
-draft: true
+draft: false
 date: 2026-09-30
 description: Markdownでブログを書くと画像や埋め込みが増えると面倒がち・・・。なので、独自ブログエディターを作ってみました。使ってみた感想を紹介します。
 tags:
