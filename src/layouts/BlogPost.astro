@@ -6,7 +6,7 @@ import Profile from '../components/Profile.astro'
 import Toc from '../components/Toc.astro'
 import ScrollToTop from '../components/ScrollToTop.astro'
 import PageAnalytics from '../components/PageAnalytics.astro'
-const {frontmatter = {comment: false, donate: false, toc: false, mathjax: false, mermaid: false}} = Astro.props
+const {frontmatter = {toc: false}} = Astro.props
 ---
 
 <html lang="ja">
@@ -14,13 +14,11 @@ const {frontmatter = {comment: false, donate: false, toc: false, mathjax: false,
   title={frontmatter.title}
   description={frontmatter.description}
   ogType="article"
-  mathjax={frontmatter.mathjax}
-  mermaid={frontmatter.mermaid}
 />
 
 <body class="bg-skin-secondary">
 <Header/>
-<main class="container p-4  pt-20 text-skin-base min-h-full pb-32 relative" id="app">
+<main class="container p-4 pt-20 text-skin-base min-h-full pb-32 relative" id="app">
   <div class="xl:grid xl:grid-cols-4 xl:gap-8">
     <div id="sidebar" class="hidden xl:block col-span-1 relative">
       <Profile></Profile>
@@ -42,6 +40,17 @@ const {frontmatter = {comment: false, donate: false, toc: false, mathjax: false,
 
 <script>
   import fancyboxStylesUrl from "@fancyapps/ui/dist/fancybox/fancybox.css?url";
+
+  // mermaid 図(reset-remark で <pre class="mermaid"> に変換済み)がある記事のみ CDN から描画ライブラリを読み込む
+  const mermaidBlocks = document.querySelectorAll("pre.mermaid");
+  if (mermaidBlocks.length > 0) {
+    const mermaidUrl = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    import(/* @vite-ignore */ mermaidUrl).then(async ({default: mermaid}) => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      mermaid.initialize({startOnLoad: false, theme: isDark ? "dark" : "default"});
+      await mermaid.run({nodes: mermaidBlocks});
+    });
+  }
 
   // 给所有的a标签添加target属性和不追踪
   const markdownBody = document.querySelector(".markdown-body");

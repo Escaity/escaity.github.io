@@ -4,7 +4,7 @@ import {dealLabel} from "../utils/dealLabel";
 const {title, date, category, tags, lastModified = '', draft = false, readingTime = {}} = Astro.props
 ---
 
-<div class="border-b-1">
+<div>
   <!-- category -->
   {
     category && dealLabel(category).filter(item => item !== 'uncategorized').map((categoryName) => (

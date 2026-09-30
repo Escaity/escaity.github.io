@@ -13,16 +13,20 @@ export async function getStaticPaths() {
 }
 
 const {entry} = Astro.props;
-const {Content, remarkPluginFrontmatter} = await render(entry);
+const {Content, headings, remarkPluginFrontmatter} = await render(entry);
 
 const lastModified = remarkPluginFrontmatter.lastModified
 const readingTime = remarkPluginFrontmatter.readingTime
+
+// モバイル用目次(サイドバーの tocbot と同じく h1〜h3 を対象)
+const tocHeadings = entry.data.toc ? headings.filter(heading => heading.depth <= 3) : [];
+const tocMinDepth = Math.min(...tocHeadings.map(heading => heading.depth));
 
 const posts = await getBlogPosts();
 const sortPosts = sortPostsByDate(posts);
 
 const currentPostIndex = sortPosts.findIndex(
-  (postItem) => postItem.data.title === entry.data.title
+  (postItem) => postItem.id === entry.id
 );
 let prevPost, nextPost
 if (sortPosts[currentPostIndex - 1]) {
@@ -36,6 +40,24 @@ if (sortPosts[currentPostIndex + 1]) {
   <div>
     <PostTitle slug={`/blog/${entry.id}`} {...entry.data} lastModified={lastModified} readingTime={readingTime}></PostTitle>
     <div class="divider-horizontal"></div>
+    {
+      tocHeadings.length >= 2 && (
+        <details class="xl:hidden mb-6 rounded-lg shadow-md bg-skin-card px-4 py-2">
+          <summary class="cursor-pointer select-none font-bold">
+            <i class="ri-list-check menu-icon"/>目次
+          </summary>
+          <ol class="mt-2 text-sm">
+            {
+              tocHeadings.map(heading => (
+                <li style={`padding-left: ${heading.depth - tocMinDepth}rem`}>
+                  <a class="block py-1 hover:text-skin-active" href={`#${heading.slug}`}>{heading.text}</a>
+                </li>
+              ))
+            }
+          </ol>
+        </details>
+      )
+    }
     <article class="markdown-body">
       <Content/>
     </article>

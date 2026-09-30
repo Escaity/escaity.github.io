@@ -1,7 +1,3 @@
----
-donate: false
-comment: false
----
 
 # About me
 

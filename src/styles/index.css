@@ -162,15 +162,6 @@ menu {
     @apply flex items-center w-full border-b mb-2;
   }
 
-  /* 侧边最近评论列表样式 */
-  .waline-comment-content {
-    @apply p-1 overflow-auto max-h-72 break-words hover:text-skin-active;
-  }
-
-  .waline-comment-author {
-    @apply text-end mb-1 break-words hover:text-skin-active;
-  }
-
   a {
     @apply cursor-pointer;
   }
@@ -243,17 +234,6 @@ ol,
 div,
 a {
   line-height: 26px;
-}
-
-/* 修改waline评论侧边栏样式 */
-.waline-comment-content-author {
-  text-align: end;
-  margin-bottom: 6px;
-}
-
-.wl-emoji {
-  height: 24px;
-  display: inline-block;
 }
 
 /*  网站列表样式清空 */
@@ -335,11 +315,6 @@ menu {
 
 .expressive-code {
   margin: 1rem 0;
-}
-
-/* fix mathjax style */
-.MathJax {
-  text-align: left !important;
 }
 
 /* github-markdown.css のパレットを Catppuccin に上書き */
