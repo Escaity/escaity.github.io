@@ -1,7 +1,7 @@
 ---
 title: "GitHub Pages × AstroブログにGA4導入時のハマりポイント"
 date: 2025-08-24
-description: "Github PagesにデプロイしたブログにGAIDをsecretに設定する時に手詰まった箇所について解説"
+description: "GitHub PagesのAstroブログで、GA4の測定IDだけ本番で読み込まれない――原因はSecretをEnvironment secretsに登録していたことでした。Repository secretsとの違いと正しい設定手順を解説します。"
 tags: ["blog", "GitHub"]
 category: Tech
 ---
@@ -35,7 +35,7 @@ GitHub Actionsのワークフロー内で `${{ secrets.HOGEHOGE }}` という構
 
 私が設定していたのは **Environment secrets** でした。  
 
-<img src="/entries/20250824/build_env_empty.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20250824/build_env_empty.webp" alt="GitHub Actionsのログ。Create .envステップでPUBLIC_GA_IDの値が空になっている" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 そのため、GitHub Actionsが実行される際に「そんなSecretは存在しない」と判断され、環境変数が空のままビルドが進んでいました。(正常に値が反映されていれば "PUBLIC_GA_ID=***" のようにマスク表示されます。)
@@ -51,7 +51,7 @@ GitHub Actionsのワークフロー内で `${{ secrets.HOGEHOGE }}` という構
 5. **Secret** 欄に、環境変数の値を貼り付ける。
 6. **[Add secret]** をクリックして保存。
 
-<img src="/entries/20250824/github_actions_secret.webp" style="width:600px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20250824/github_actions_secret.webp" alt="GitHubのSettings &gt; Secrets and variables &gt; Actions画面。Repository secretsのNew repository secretボタンを示している" style="width:600px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 ---

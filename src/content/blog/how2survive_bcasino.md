@@ -1,7 +1,7 @@
 ---
 title: "ビリオネアカジノで生き残るには"
 date: 2025-09-12
-description: "チップを失うことなく、長くゲームを楽しむための「サバイバル術」について解説"
+description: "ソーシャルカジノ「ビリオネアカジノ」でチップを失わず長く遊ぶためのサバイバル術。アクティブなクラブへの参加、ベット額の管理、一撃離脱、レベル上げ優先の4つのコツを解説します。"
 tags: ["casino"]
 category: 雑記
 ---
@@ -12,7 +12,7 @@ category: 雑記
 筆者自身も十数回と爆勝ち → 無一文のループを繰り返してきました。  
 この流れから学んだ経験を活かし、現在では **1Qaチップ** に到達しています。（ちなみに課金総額は **$2**、微課金勢です。）
 
-<img src="/entries/20250912/profile.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20250912/profile.webp" alt="ビリオネアカジノのプロフィール画面。所持チップは約1Qa（1,077兆）" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 今回の記事ではチップを失うことなく、長くゲームを楽しむための「サバイバル術」について解説します。
@@ -26,13 +26,13 @@ category: 雑記
 
 下図のように検索条件を絞るとリーグポイントの高いクラブが出やすくなります。クラブ人数を微調整すると良いでしょう。  
 
-<img src="/entries/20250912/join_club.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20250912/join_club.webp" alt="クラブ検索画面。会員60〜100人、名声100以上、クラブレベル15以上、誰でも参加OKの条件で絞り込み" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 ### なぜクラブ参加が重要なのか？
 - **豊富なボーナス**: アクティブなクラブではジャックポットボーナスの配布やクラブイベントの達成によりチップを獲得できます。（下図のようにクラブメンバーのお裾分けをもらえます。）
 
-<img src="/entries/20250912/jackpot_bonus.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20250912/jackpot_bonus.webp" alt="クラブ掲示板に表示された本日のジャックポットボーナス（81.5Bチップ）の受け取りボタン" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 

@@ -1,7 +1,7 @@
 ---
 title: "AI安全性を突破する新手法「InfoFlood」とは？"
 date: 2025-07-12
-description: "研究論文「InfoFlood: Jailbreaking Large Language Models with Information Overload」について具体例を用いて解説します。"
+description: "冗長で複雑な文章だけでLLMの安全フィルターを突破する新手法「InfoFlood」。論文が示す3段階の手法、主要LLMでの成功率、既存の防御策が効きにくい理由を具体例つきで解説します。"
 tags: ["AI", "arXiv"]
 category: AI
 ---

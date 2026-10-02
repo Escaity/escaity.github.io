@@ -1,7 +1,7 @@
 ---
 title: "ローカル開発をHTTPS対応に！Vite環境にmkcert導入する！！"
 date: 2025-06-28
-description: "ローカルHTTPS化を簡単に行えるツール「mkcert」の使い方と注意点を紹介"
+description: "mkcertでローカル開発環境を手軽にHTTPS化する方法を解説。Homebrewでのインストールと証明書の作成、Vite開発サーバーへの設定、Firefoxで「certutil」の警告が出るときの対処法を紹介します。"
 tags: ["web", "Vite"]
 category: Tech
 ---

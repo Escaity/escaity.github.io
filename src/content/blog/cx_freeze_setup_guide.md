@@ -1,7 +1,7 @@
 ---
 title: "cx_FreezeでPythonアプリをexe化!Windows用にsetup.pyを作成!!"
 date: 2025-07-01
-description: "setup.py を、Windowsでも使えるようにする手順を紹介します。"
+description: "cx_FreezeでPythonアプリを実行ファイル化するとき、macOS用のsetup.pyをWindowsでも使えるようにする方法を解説。base指定、.icoアイコン、sys.platformでの切り替えの3点と完成版コードを紹介します。"
 tags: ["Python"]
 category: Tech
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Unity Cloud BuildのGradleをバージョンアップしてビルドする！"
 date: 2024-01-13
-description: "Unity Cloud BuildでGradleバージョンをアップグレードしてビルドする方法を解説します。"
+description: "Unity Cloud BuildでGradleを6.7.1以降に上げてビルドする方法を解説。pre-build scriptでのGradleインストール、Pre-Export methodの作成、Configurationの設定手順を紹介します。"
 tags: ["Unity"]
 category: Tech
 ---

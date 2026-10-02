@@ -1,7 +1,7 @@
 ---
 title: "pod installで EACCES - Permission denied でインストールできない場合の対処方法"
 date: 2024-01-31
-description: "pod instal で管理者権限関連のエラーが発生した時の対処法について解説します。"
+description: "pod installで「Errno::EACCES - Permission denied」が出るときの対処法。原因はCocoaPodsのキャッシュフォルダの所有者がrootになっていることで、chownで権限を戻せば解決します。"
 tags: ["Unity", "error"]
 category: Tech
 ---

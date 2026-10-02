@@ -1,7 +1,7 @@
 ---
 title: "知ってる曲が踊り出す ― Jersey Club Remix 5選"
 date: 2025-09-26
-description: "Jersey Club Remixの魅力を5曲を通して紹介！！"
+description: "聴き慣れたヒット曲が跳ねるビートで生まれ変わるJersey Club Remix。Tyla「Water」、XG「NEW DANCE」、JENNIE「Like JENNIE」など、原曲へのリスペクトが光るRemixを5曲紹介します。"
 tags: ["jersey club"]
 category: 雑記
 ---

@@ -2,7 +2,7 @@
 title: AstroブログエディターをAstra君と作った！！
 draft: false
 date: 2026-09-30
-description: Markdownでブログを書くと画像や埋め込みが増えると面倒がち・・・。なので、独自ブログエディターを作ってみました。使ってみた感想を紹介します。
+description: "Markdownでブログを書くと、画像や埋め込みの扱いが面倒になりがち。そこでAstroブログ用のエディター「ことのは」を自作しました。画面構成や普通のMarkdown執筆との違い、使ってみた感想を紹介します。"
 tags:
   - Astro
   - Markdown

@@ -1,7 +1,7 @@
 ---
 title: "Python SSL証明書エラー解決ガイド (MacOS)"
 date: 2025-06-26
-description: "ssl.SSLCertVerificationError: 発生する原因と、具体的な解決策を解説します"
+description: "macOSのPythonで出る「SSLCertVerificationError」の原因と解決策を解説。Install Certificates.commandの実行やcertifiの更新で直す方法と、証明書の検証を無効化するリスクを紹介します。"
 tags: ["Python", "error"]
 category: Tech
 ---

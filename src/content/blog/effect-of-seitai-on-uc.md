@@ -1,7 +1,7 @@
 ---
 title: "漢方薬「青黛」、潰瘍性大腸炎に新たな希望"
 date: 2025-09-22
-description: "慶應大学の研究で青黛が潰瘍性大腸炎に有効な治療法であることを示されました。"
+description: "漢方薬「青黛（せいたい）」が潰瘍性大腸炎に高い有効性を示したことが慶應義塾大学などの臨床試験で判明。8週後の有効率はプラセボ13.6%に対し69.6〜81.0%。作用の仕組みや安全性の注意点も解説します。"
 tags: ["thesis"]
 category: 雑記
 ---
@@ -30,7 +30,7 @@ category: 雑記
 
 さらに、症状がほぼ消失した状態である「臨床的寛解」や、内視鏡で見て大腸粘膜の炎症が治癒している「粘膜治癒」を達成した患者の割合も、青黛群がプラセボ群を大きく上回りました。
 
-<img src="/entries/20250922/171128-1_fig1.webp" style="width:700px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20250922/171128-1_fig1.webp" alt="青黛の8週間投与の結果を示す棒グラフ。臨床的有効率はプラセボ群13.6%に対し青黛群69.6〜81.0%" style="width:700px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 ---

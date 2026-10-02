@@ -1,7 +1,7 @@
 ---
 title: "Astro + GitHubでブログを自動更新！  "
 date: 2025-06-29
-description: "Github Actionを利用した自動デプロイ手順を解説します"
+description: "AstroのブログをGitHub Pagesで無料公開し、pushするだけでGitHub Actionsが自動デプロイする仕組みを作る手順を解説。astro.config.mjsの設定からPagesの設定まで4ステップで紹介します。"
 tags: ["web", "GitHub"]
 category: Tech
 ---

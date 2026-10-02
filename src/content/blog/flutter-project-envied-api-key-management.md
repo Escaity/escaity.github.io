@@ -1,7 +1,7 @@
 ---
 title: "FlutterプロジェクトにEnviedを導入してAPI Keyを管理する！"
 date: 2024-02-03
-description: "enviedのbuild_runner実行時のエラーに対処する方法について解説します。"
+description: "FlutterでAPIキーを安全に扱うためにEnviedを導入する手順を解説。公式README通りではbuild_runnerがエラーになる問題の対処法、.envの準備、env.g.dartの生成、使用例までまとめています。"
 tags: ["Flutter","env"]
 category: Tech
 ---

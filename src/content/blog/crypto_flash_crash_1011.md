@@ -1,7 +1,7 @@
 ---
 title: "仮想通貨市場を飲み込んだ24時間 ― 190億ドル清算事件の全貌"
 date: 2025-11-08
-description: "2025年10月フラッシュクラッシュ：市場を壊したのは誰か？"
+description: "2025年10月10日夜、仮想通貨市場で約190億ドルが清算された史上最大のフラッシュクラッシュ。トランプ発言、BinanceのUSDe乖離とオラクルの盲点、DeFiの隠れレバレッジなど崩壊の連鎖を追います。"
 tags: ["crypto"]
 category: Finance
 ---
@@ -132,13 +132,13 @@ Unified Accountは「複数ポジションを1つの口座でまとめて管理�
 | 23：00 | 清算総額 $190億到達            | 160万人が巻き込まれる     |
 
 USDE/USDT 1m
-<img src="/entries/20251108/usde_1m.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20251108/usde_1m.webp" alt="USDE/USDTの1分足チャート。2025年10月11日朝に1ドル前後から0.65ドルまで急落し、その後回復" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 WBETH/USDT 1m
-<img src="/entries/20251108/wbeth_1m.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20251108/wbeth_1m.webp" alt="WBETH/USDTの15分足チャート。約4,300ドルから一時430.65ドルまで暴落" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 BNSOL/USDT 1m
-<img src="/entries/20251108/bnsol_1m.webp" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
+<img src="/entries/20251108/bnsol_1m.webp" alt="BNSOL/USDTの1分足チャート。約200ドルから一時34.9ドルまで急落" style="width:500px; margin: auto;" loading="lazy" decoding="async" data-fancybox="gallery">
 <br>
 
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Github Actionsでサイト更新を自動化する方法"
 date: 2024-05-28
-description: "エックスサーバーで公開しているサイトをGithub Actionsを用いてGithubに変更をプッシュするだけで更新する方法を解説します！！"
+description: "エックスサーバーで公開しているサイトを、GitHubにpushするだけで更新できるようにする方法を解説。GitHub Actionsでのビルド、SSH鍵の生成、rsyncによるデプロイまでのワークフローを紹介します。"
 tags: ["Astro", "blog"]
 category: Tech
 ---

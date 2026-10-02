@@ -1,7 +1,7 @@
 ---
 title: "Astroでブログ作ってみた"
 date: 2024-01-07
-description: 最初のAstro記事です。
+description: "Astro公式チュートリアル「初めてのAstroブログ」をベースにブログを作ってみました。追加で実装したページネーション、シンタックスハイライト、ダークテーマと今後の目標をまとめています。"
 tags: ["Astro", "blog"]
 category: Tech
 ---
