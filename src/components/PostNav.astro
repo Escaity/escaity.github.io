@@ -8,7 +8,7 @@ const {prevPost, nextPost} = Astro.props;
     <nav class="grid gap-4 sm:grid-cols-2" aria-label="前後の記事">
       {
         prevPost && (
-          <a class="post-nav-card" href={`/blog/${prevPost.id}`}>
+          <a class="post-nav-card" href={`/blog/${prevPost.id}/`}>
             <div class="text-sm opacity-75"><i class="ri-arrow-left-s-fill"/>前の記事</div>
             <div class="font-bold line-clamp-2">{prevPost.data.title}</div>
           </a>
@@ -16,7 +16,7 @@ const {prevPost, nextPost} = Astro.props;
       }
       {
         nextPost && (
-          <a class="post-nav-card text-right sm:col-start-2" href={`/blog/${nextPost.id}`}>
+          <a class="post-nav-card text-right sm:col-start-2" href={`/blog/${nextPost.id}/`}>
             <div class="text-sm opacity-75">次の記事<i class="ri-arrow-right-s-fill"/></div>
             <div class="font-bold line-clamp-2">{nextPost.data.title}</div>
           </a>

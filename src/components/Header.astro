@@ -86,7 +86,7 @@ const SiteTitleTag = Astro.url.pathname === '/' ? 'h1' : 'div';
       {
         Object.keys(categoryCount).map((category) => (
           <div class="my-2 break-all truncate">
-            <a class="hover:text-skin-active" title={category + " (" + categoryCount[category] + ")"} href={"/category/" + category}>
+            <a class="hover:text-skin-active" title={category + " (" + categoryCount[category] + ")"} href={"/category/" + category + "/"}>
               {category + " (" + categoryCount[category] + ")"}
             </a>
           </div>
@@ -114,7 +114,7 @@ const SiteTitleTag = Astro.url.pathname === '/' ? 'h1' : 'div';
       {
         archives.length > archiveLimit && (
           <div class="my-2">
-            <a class="inline-block border rounded-full py-1 px-4 text-sm hover:text-skin-active" href="/archive">
+            <a class="inline-block border rounded-full py-1 px-4 text-sm hover:text-skin-active" href="/archive/">
               もっと見る
             </a>
           </div>

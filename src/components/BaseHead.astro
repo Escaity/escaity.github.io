@@ -15,6 +15,8 @@ const {
   modifiedTime,
   tags = [],
   categories = [],
+  // 検索ページ・404 など検索結果に出す必要のないページ
+  noindex = false,
 } = Astro.props;
 const pageTitle = title ? `${title} | ${site.title}` : site.title;
 const pageDescription = description || site.description;
@@ -61,8 +63,8 @@ const jsonLd = isArticle
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <link rel="icon" type="image/svg+xml" href={site.favicon}/>
   <meta name="generator" content={Astro.generator}/>
-  <!-- Canonical URL -->
-  <link rel="canonical" href={canonicalURL}/>
+  <!-- Canonical URL(noindex のページには付けない) -->
+  {noindex ? <meta name="robots" content="noindex, follow"/> : <link rel="canonical" href={canonicalURL}/>}
   <!-- RSS Autodiscovery -->
   <link rel="alternate" type="application/rss+xml" title={site.title} href={new URL('rss.xml', Astro.site)}/>
 
@@ -97,7 +99,6 @@ const jsonLd = isArticle
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="msapplication-TileColor" content="#da532c"/>
-  <meta name="msapplication-config" content="/browserconfig.xml"/>
   <meta name="theme-color" content="#ffffff"/>
 
   <title>{pageTitle}</title>

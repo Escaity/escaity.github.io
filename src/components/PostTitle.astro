@@ -9,7 +9,7 @@ const {title, date, category, tags, lastModified = '', draft = false, readingTim
   {
     category && dealLabel(category).filter(item => item !== 'uncategorized').map((categoryName) => (
       <i class="ri-folder-3-line"/>
-      <a href={"/category/" + categoryName} class="text-wrap break-all  hover:text-skin-active cursor-pointer">{categoryName}</a>
+      <a href={"/category/" + categoryName + "/"} class="text-wrap break-all  hover:text-skin-active cursor-pointer">{categoryName}</a>
     ))
   }
 
@@ -18,7 +18,7 @@ const {title, date, category, tags, lastModified = '', draft = false, readingTim
     tags && dealLabel(tags).map((tagName) => (
       <div class="divider-vertical"/>
       <i class="ri-price-tag-3-line"/>
-      <a href={"/tags/" + tagName} class="text-wrap break-all hover:text-skin-active cursor-pointer">{tagName}</a>
+      <a href={"/tags/" + tagName + "/"} class="text-wrap break-all hover:text-skin-active cursor-pointer">{tagName}</a>
     ))
   }
 

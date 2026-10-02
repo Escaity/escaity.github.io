@@ -52,7 +52,7 @@ const relatedPosts = getRelatedPosts(posts, entry);
   <div class="space-y-8">
     <!-- 全文検索(Pagefind)のインデックス対象はタイトルと本文のみ -->
     <div data-pagefind-body>
-      <PostTitle slug={`/blog/${entry.id}`} {...entry.data} lastModified={lastModified} readingTime={readingTime}></PostTitle>
+      <PostTitle slug={`/blog/${entry.id}/`} {...entry.data} lastModified={lastModified} readingTime={readingTime}></PostTitle>
       <div class="divider-horizontal"></div>
       {
         tocHeadings.length >= 2 && (

@@ -16,7 +16,7 @@ const {archives, categoryCount} = await getSidebarData();
       <a
         class="my-1 truncate block hover:text-skin-active"
         title={category + " (" + categoryCount[category] + ")"}
-        href={"/category/" + category}
+        href={"/category/" + category + "/"}
       >
         {(category === 'uncategorized' ? '未分類' : category) + " (" + categoryCount[category] + ")"}
       </a>
@@ -48,7 +48,7 @@ const {archives, categoryCount} = await getSidebarData();
   </div>
   {
     archives.length > archiveLimit && (
-      <a class="inline-block mt-2 border rounded-full py-1 px-4 text-sm hover:text-skin-active" href="/archive">
+      <a class="inline-block mt-2 border rounded-full py-1 px-4 text-sm hover:text-skin-active" href="/archive/">
         もっと見る
       </a>
     )

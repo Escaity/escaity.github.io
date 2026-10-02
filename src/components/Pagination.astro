@@ -5,11 +5,11 @@ const {
   currentPage,
   totalPage,
   prefixUrl = "/blog/",
-  firstPageHref = `${prefixUrl}1`,
+  firstPageHref = `${prefixUrl}1/`,
 } = Astro.props;
 
 // ページ番号 → リンク先(1ページ目のみ firstPageHref)
-const pageHref = (page) => (page === 1 ? firstPageHref : prefixUrl + page);
+const pageHref = (page) => (page === 1 ? firstPageHref : `${prefixUrl}${page}/`);
 
 if (totalPage === 1) {
   pager = [];
@@ -84,7 +84,7 @@ if (totalPage === 1) {
     }
     {
       pager.length > 4 && currentPage < totalPage && (
-        <a href={prefixUrl + totalPage} title="最後のページ" aria-label="最後のページ">
+        <a href={pageHref(totalPage)} title="最後のページ" aria-label="最後のページ">
           <i class="ri-skip-right-line"></i>
         </a>
       )

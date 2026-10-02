@@ -17,7 +17,7 @@
 export const site = {
   title: 'AIcicle Records', // required
   favicon: '/favicon.svg', // required
-  description: 'AIと対話記録をメモしてます',
+  description: 'AIとの対話をきっかけに、AI・金融・暗号資産・プログラミングなど気になった話題を調べてまとめている個人ブログです。',
   author: "Escaity", // required
   avatar: '/avatar.webp', // required
   motto: 'True wealth is experience.',
@@ -51,17 +51,17 @@ export const categories = [
   {
     name: "Archive",
     iconClass: "ri-archive-line",
-    href: "/archive",
+    href: "/archive/",
   },
   {
     name: "About",
     iconClass: "ri-user-line",
-    href: "/about",
+    href: "/about/",
   },
   {
     name: "Search",
     iconClass: "ri-search-line",
-    href: "/search",
+    href: "/search/",
   },
 
 ]

@@ -2,7 +2,7 @@
 import IndexPage from "src/layouts/IndexPage.astro";
 ---
 
-<IndexPage title="404 Not Found">
+<IndexPage title="404 Not Found" noindex>
   <div class="text-center py-16">
     <div class="text-7xl font-bold text-skin-accent mb-4">404</div>
     <p class="mb-8">お探しのページは見つかりませんでした。<br/>移動または削除された可能性があります。</p>
@@ -10,7 +10,7 @@ import IndexPage from "src/layouts/IndexPage.astro";
       <a class="border rounded-full py-2 px-6 hover:text-skin-active" href="/">
         <i class="ri-home-8-line mr-1"/>トップへ戻る
       </a>
-      <a class="border rounded-full py-2 px-6 hover:text-skin-active" href="/search">
+      <a class="border rounded-full py-2 px-6 hover:text-skin-active" href="/search/">
         <i class="ri-search-line mr-1"/>記事を探す
       </a>
     </div>

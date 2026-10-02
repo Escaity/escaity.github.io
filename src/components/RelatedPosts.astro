@@ -15,7 +15,7 @@ const {posts} = Astro.props;
           posts.map((post) => (
             <a
               class="flex flex-col rounded-xl p-4 shadow-md bg-skin-fill hover:shadow-lg hover:text-skin-accent transition-shadow"
-              href={`/blog/${post.id}`}
+              href={`/blog/${post.id}/`}
             >
               <div class="font-bold line-clamp-3">{post.data.title}</div>
               <div class="mt-auto pt-2 text-sm opacity-75">

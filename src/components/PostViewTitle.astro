@@ -40,7 +40,7 @@ const {title, date, slug, category, tags, sticky = false, draft = false} = Astro
       category && dealLabel(category).filter(item => item !== 'uncategorized').map((categoryName) => (
         <div class="divider-vertical"/>
         <i class="text-skin-accent text-xl ri-folder-3-line"/>
-        <a href={"/category/" + categoryName} class="text-sm text-wrap break-all hover:text-skin-active">{categoryName}</a>
+        <a href={"/category/" + categoryName + "/"} class="text-sm text-wrap break-all hover:text-skin-active">{categoryName}</a>
       ))
     }
 
@@ -49,7 +49,7 @@ const {title, date, slug, category, tags, sticky = false, draft = false} = Astro
       tags && dealLabel(tags).map((tagName) => (
         <div class="divider-vertical"/>
         <i class="text-skin-accent text-xl ri-price-tag-3-line"/>
-        <a href={"/tags/" + tagName} class="text-sm text-wrap break-all hover:text-skin-active">{tagName}</a>
+        <a href={"/tags/" + tagName + "/"} class="text-sm text-wrap break-all hover:text-skin-active">{tagName}</a>
       ))
     }
   </div>

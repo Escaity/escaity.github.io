@@ -132,7 +132,7 @@ export function Search(props) {
               <div class="mb-2"><i class="ri-folder-3-line mr-1"/>カテゴリーから探す</div>
               <div class="flex flex-wrap gap-2 mb-6">
                 {categories.map(([name, count]) =>
-                  <a class="border rounded-full py-1 px-3 text-sm hover:text-skin-active" href={'/category/' + name}>{name} ({count})</a>
+                  <a class="border rounded-full py-1 px-3 text-sm hover:text-skin-active" href={'/category/' + name + '/'}>{name} ({count})</a>
                 )}
               </div>
             </>}
@@ -141,7 +141,7 @@ export function Search(props) {
               <div class="mb-2"><i class="ri-price-tag-3-line mr-1"/>タグから探す</div>
               <div class="flex flex-wrap gap-2">
                 {tags.map(([name, count]) =>
-                  <a class="border rounded-full py-1 px-3 text-sm hover:text-skin-active" href={'/tags/' + name}>{name} ({count})</a>
+                  <a class="border rounded-full py-1 px-3 text-sm hover:text-skin-active" href={'/tags/' + name + '/'}>{name} ({count})</a>
                 )}
               </div>
             </>}
@@ -152,7 +152,7 @@ export function Search(props) {
           <>
             <a
               class="text-xl underline-offset-4 decoration-skin-base decoration-wavy hover:underline hover:decoration-sky-500 font-bold"
-              href={'/' + post.collection + '/' + post.id} innerHTML={highlight(post.data.title, inputVal())}>
+              href={'/' + post.collection + '/' + post.id + '/'} innerHTML={highlight(post.data.title, inputVal())}>
             </a>
             <div class="flex items-center flex-wrap">
               {post.data.date ?
@@ -165,7 +165,7 @@ export function Search(props) {
                 <div class="flex items-center">
                   <div class="divider-vertical"/>
                   <i class="ri-folder-2-fill mr-1"/>
-                  <a href={"/category/" + categoryName}>{categoryName}</a>
+                  <a href={"/category/" + categoryName + "/"}>{categoryName}</a>
                 </div>
               ))}
 
@@ -173,7 +173,7 @@ export function Search(props) {
                 <div class="flex items-center">
                   <div class="divider-vertical"/>
                   <i class="ri-price-tag-3-fill mr-1"/>
-                  <a href={"/tags/" + tagName}>{tagName}</a>
+                  <a href={"/tags/" + tagName + "/"}>{tagName}</a>
                 </div>
               ))}
             </div>

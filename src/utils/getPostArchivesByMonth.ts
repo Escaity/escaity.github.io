@@ -21,7 +21,8 @@ const getPostArchivesByMonth = (posts, pageSize = site.archivePageSize) => {
         key,
         label: formatArchiveLabel(date),
         count: 0,
-        href: `/archive/${page}#archive-${key}`,
+        // 1ページ目は /archive/1/ ではなく /archive/(リダイレクトでアンカーが失われないように)
+        href: `${page === 1 ? '/archive/' : `/archive/${page}/`}#archive-${key}`,
       });
     }
 
