@@ -38,6 +38,7 @@ function customRehypeLazyLoadImage() {
 export default defineConfig({
   site: 'https://escaity.github.io/',
   output: 'static',
+  compressHTML: true,
   adapter: undefined,
   redirects: {
     '/blog/1': '/',

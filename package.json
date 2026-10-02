@@ -2,6 +2,9 @@
   "name": "astro-blog",
   "type": "module",
   "version": "0.0.5",
+  "engines": {
+    "node": ">=22.19.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,37 +13,40 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^6.0.3",
-    "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.7.3",
-    "@astrojs/solid-js": "^6.0.1",
-    "@expressive-code/plugin-collapsible-sections": "^0.43.1",
-    "@expressive-code/plugin-line-numbers": "^0.43.1",
-    "@fancyapps/ui": "^6.1.14",
-    "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.4.6",
-    "astro-expressive-code": "^0.43.1",
-    "dayjs": "^1.11.21",
+    "@astrojs/markdown-remark": "^7.3.1",
+    "@astrojs/mdx": "^8.0.2",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/solid-js": "^7.0.2",
+    "@expressive-code/plugin-collapsible-sections": "^0.44.2",
+    "@expressive-code/plugin-line-numbers": "^0.44.2",
+    "@fancyapps/ui": "^6.1.15",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "astro-expressive-code": "^0.44.2",
+    "dayjs": "^1.11.23",
     "hastscript": "^9.0.1",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
     "remark-directive": "^4.0.0",
     "remixicon": "^4.9.1",
     "satori": "^0.33.5",
-    "sharp": "^0.34.5",
-    "solid-js": "^1.9.13",
-    "tailwindcss": "^4.3.0",
+    "sharp": "^0.35.5",
+    "solid-js": "^1.9.15",
+    "tailwindcss": "^4.3.3",
     "tocbot": "^4.36.8",
     "typescript": "^6.0.3",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
-    "npm-check-updates": "^22.2.3",
+    "npm-check-updates": "^22.2.9",
     "pagefind": "^1.5.2",
-    "sass": "^1.100.0"
+    "sass": "^1.105.1"
   },
   "overrides": {
-    "vite": "7.3.5"
+    "satori": {
+      "fflate": "0.7.5"
+    }
   }
 }
