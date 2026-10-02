@@ -1,1 +1,0 @@
-export { sortPostsByDate } from './posts';

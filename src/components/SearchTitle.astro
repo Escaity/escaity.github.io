@@ -1,9 +1,0 @@
----
-const { label, type = 'category', count } = Astro.props;
-const displayLabel = label === 'uncategorized' ? '未分類' : label;
----
-
-<h1 class="my-2 text-wrap break-all">
-  <span class="text-skin-active mx-1">{displayLabel}</span>
-  {type === 'tag' ? 'タグ' : 'カテゴリー'}の記事{count !== undefined && `（${count}件）`}
-</h1>
