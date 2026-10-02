@@ -14,7 +14,7 @@ import {pluginLineNumbers} from '@expressive-code/plugin-line-numbers'
 
 import {visit} from 'unist-util-visit'
 import {pluginCollapsibleSections} from '@expressive-code/plugin-collapsible-sections'
-import {readdirSync} from 'fs'
+import {existsSync, readdirSync, readFileSync} from 'fs'
 import {getGitContentDates} from './src/utils/gitContentDates.ts'
 
 const SITE_URL = 'https://escaity.github.io/'
@@ -27,8 +27,12 @@ const blogFileByUrl = new Map(
     .map((file) => [new URL(`/blog/${file.replace(/\.mdx?$/, '').toLowerCase()}/`, SITE_URL).href, `${BLOG_DIR}/${file}`])
 )
 
-// 検索エンジンに登録しないページ(noindex を付けているもの)
-const sitemapExcludePaths = ['/search/']
+// noindex を付けたページ(検索・404・記事の少ないタグなど)は sitemap に載せない。
+// sitemap は全ページの出力後に生成されるので、出力済みの HTML の robots meta で判定する
+const isNoindexPage = (page) => {
+  const file = `dist${decodeURIComponent(new URL(page).pathname)}index.html`
+  return existsSync(file) && readFileSync(file, 'utf-8').includes('<meta name="robots" content="noindex')
+}
 
 function customRehypeLazyLoadImage() {
   return function (tree) {
@@ -74,7 +78,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [sitemap({
-    filter: (page) => !sitemapExcludePaths.includes(new URL(page).pathname),
+    filter: (page) => !isNoindexPage(page),
     // 記事は git の最終コミット日(.lastmod-ignore-revs のコミットは除外)を lastmod にする
     serialize(item) {
       const file = blogFileByUrl.get(item.url)

@@ -6,6 +6,7 @@ import SearchTitle from "src/components/SearchTitle.astro";
 import {sortPostsByDate} from "src/utils/sortPostsByDate";
 import {getBlogPosts} from "../../utils/posts";
 import PostSummaryList from "src/components/PostSummaryList.astro";
+import {getListPageDescription, MIN_POSTS_FOR_INDEX} from "src/utils/listPage";
 export async function getStaticPaths() {
   const posts = await getBlogPosts();
   const category = getUniqueCategory(posts);
@@ -24,9 +25,10 @@ const {category} = Astro.props;
 let posts = await getBlogPosts();
 const categoryPosts = getPostsByCategory(posts, category);
 const resultPosts = sortPostsByDate(categoryPosts);
+const description = getListPageDescription(`「${category}」カテゴリーの記事一覧`, resultPosts);
 ---
 
-<IndexPage title={`カテゴリー: ${category}`}>
-  <SearchTitle label={category}/>
+<IndexPage title={`カテゴリー: ${category}`} description={description} noindex={resultPosts.length < MIN_POSTS_FOR_INDEX}>
+  <SearchTitle label={category} count={resultPosts.length}/>
   <PostSummaryList posts={resultPosts}/>
 </IndexPage>

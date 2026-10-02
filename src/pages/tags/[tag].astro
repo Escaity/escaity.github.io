@@ -6,6 +6,7 @@ import SearchTitle from "src/components/SearchTitle.astro";
 import {sortPostsByDate} from "src/utils/sortPostsByDate";
 import {getBlogPosts} from "../../utils/posts";
 import PostSummaryList from "src/components/PostSummaryList.astro";
+import {getListPageDescription, MIN_POSTS_FOR_INDEX} from "src/utils/listPage";
 export async function getStaticPaths() {
   const posts = await getBlogPosts();
   //   过滤没有分类的文章，todo 后期可能会强制需要文章分类
@@ -18,9 +19,10 @@ const {tag} = Astro.props;
 let posts = await getBlogPosts();
 const tagPosts = getPostsByTag(posts, tag);
 const resultPosts = sortPostsByDate(tagPosts);
+const description = getListPageDescription(`「${tag}」タグの記事一覧`, resultPosts);
 ---
 
-<IndexPage title={`タグ: ${tag}`}>
-  <SearchTitle label={tag}/>
+<IndexPage title={`タグ: ${tag}`} description={description} noindex={resultPosts.length < MIN_POSTS_FOR_INDEX}>
+  <SearchTitle label={tag} type="tag" count={resultPosts.length}/>
   <PostSummaryList posts={resultPosts}/>
 </IndexPage>
