@@ -1,22 +1,6 @@
-const primaryColorScheme = ""; // "light" | "dark"
-
-// Get theme data from local storage
-const currentTheme = localStorage.getItem("theme");
-
-function getPreferTheme() {
-  // return theme value in local storage if it is set
-  if (currentTheme) return currentTheme;
-
-  // return primary color scheme if it is set
-  if (primaryColorScheme) return primaryColorScheme;
-
-  // return user device's prefer color scheme
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
-
-let themeValue = getPreferTheme();
+// 保存済みのテーマ → OS の設定の順で決める
+let themeValue = localStorage.getItem("theme")
+  || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
 function setPreference() {
   localStorage.setItem("theme", themeValue);
@@ -41,12 +25,7 @@ function init() {
     themeValue = themeValue === "light" ? "dark" : "light";
     setPreference();
   });
-  document.querySelector("#theme-btn-mobile")?.addEventListener("click", () => {
-    themeValue = themeValue === "light" ? "dark" : "light";
-    setPreference();
-  });
 }
-
 
 // window.onload だと画像読み込み完了までボタンが効かないため DOMContentLoaded で登録する
 if (document.readyState === "loading") {

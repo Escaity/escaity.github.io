@@ -7,9 +7,7 @@ export function remarkModifiedTime() {
     const filepath = file.history[0];
     const publishedDate = file.data.astro.frontmatter.date;
     file.data.astro.frontmatter.lastModified = getGitLastModifiedLabel(filepath, publishedDate);
-    // 获取文章字数和阅读时长
-    const textOnPage = toString(tree);
-    // readingTime.text 会以友好的字符串形式给出阅读时间，例如 "3 min read"。
-    file.data.astro.frontmatter.readingTime = getReadingTime(textOnPage,);
+    // 本文の文字数から読了時間を計算する
+    file.data.astro.frontmatter.readingTime = getReadingTime(toString(tree));
   };
 }

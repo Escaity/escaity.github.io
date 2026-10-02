@@ -26,20 +26,17 @@ const ignoredRevs = (() => {
   );
 })();
 
+// 記事ファイルのコミット日時(新しい順)。git 管理外などで取得できなければ空
 function readGitCommitDates(filepath: string) {
-  const result = execFileSync(
-    "git",
-    ["log", "--follow", "--format=%H %cI", "--", filepath],
-    {encoding: "utf-8"}
-  );
-
-  return result
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => line.split(" "))
-    .filter(([hash]) => !ignoredRevs.has(hash))
-    .map(([, date]) => date);
+  try {
+    return execFileSync("git", ["log", "--follow", "--format=%H %cI", "--", filepath], {encoding: "utf-8"})
+      .split("\n")
+      .map((line) => line.trim().split(" "))
+      .filter(([hash]) => hash && !ignoredRevs.has(hash))
+      .map(([, date]) => new Date(date));
+  } catch {
+    return [];
+  }
 }
 
 export function getGitContentDates(filepath?: string): GitContentDates {
@@ -47,29 +44,15 @@ export function getGitContentDates(filepath?: string): GitContentDates {
     return {createdAt: null, lastCommittedAt: null, commitCount: 0};
   }
 
-  const cached = gitContentDatesCache.get(filepath);
-  if (cached) {
-    return cached;
-  }
-
-  try {
+  if (!gitContentDatesCache.has(filepath)) {
     const commitDates = readGitCommitDates(filepath);
-    const dates = {
-      createdAt: commitDates.length ? new Date(commitDates[commitDates.length - 1]) : null,
-      lastCommittedAt: commitDates.length ? new Date(commitDates[0]) : null,
+    gitContentDatesCache.set(filepath, {
+      createdAt: commitDates.at(-1) ?? null,
+      lastCommittedAt: commitDates[0] ?? null,
       commitCount: commitDates.length,
-    };
-    gitContentDatesCache.set(filepath, dates);
-    return dates;
-  } catch {
-    const dates = {createdAt: null, lastCommittedAt: null, commitCount: 0};
-    gitContentDatesCache.set(filepath, dates);
-    return dates;
+    });
   }
-}
-
-export function getGitCreatedAt(filepath?: string) {
-  return getGitContentDates(filepath).createdAt;
+  return gitContentDatesCache.get(filepath);
 }
 
 export function getGitLastModifiedLabel(filepath: string, publishedDate?: Date | null) {

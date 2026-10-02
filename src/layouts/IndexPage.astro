@@ -4,7 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Profile from '../components/Profile.astro'
 import BlogAside from '../components/BlogAside.astro'
-import PageAnalytics from '../components/PageAnalytics.astro'
 const {title, description, noindex} = Astro.props
 ---
 
@@ -28,7 +27,6 @@ const {title, description, noindex} = Astro.props
   </div>
   <Footer/>
 </main>
-<PageAnalytics/>
 </body>
 <script>
   // 外部リンクのみ nofollow を付与する(内部リンクに付けるとSEO上不利)

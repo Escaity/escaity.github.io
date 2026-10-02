@@ -1,28 +1,17 @@
 ---
-import IndexPage from "src/layouts/IndexPage.astro";
-import getUniqueTags from "src/utils/getUniqueTags";
-import getPostsByTag from "src/utils/getPostsByTag";
-import SearchTitle from "src/components/SearchTitle.astro";
-import {sortPostsByDate} from "src/utils/sortPostsByDate";
-import {getBlogPosts} from "../../utils/posts";
-import PostSummaryList from "src/components/PostSummaryList.astro";
-import {getListPageDescription, MIN_POSTS_FOR_INDEX} from "src/utils/listPage";
+import LabelPostList from "../../components/LabelPostList.astro";
+import {countLabels, getPostsByLabel} from "../../utils/labels";
+import {getBlogPosts, sortPostsByDate} from "../../utils/posts";
+
 export async function getStaticPaths() {
-  const posts = await getBlogPosts();
-  //   过滤没有分类的文章，todo 后期可能会强制需要文章分类
-  const tags = getUniqueTags(posts).filter((tag) => tag);
-  return tags.map((tag) => {
-    return {params: {tag,}, props: {tag,},};
-  });
+  const posts = sortPostsByDate(await getBlogPosts());
+  return Object.keys(countLabels(posts, 'tags')).map((tag) => ({
+    params: {tag},
+    props: {tag, posts: getPostsByLabel(posts, 'tags', tag)},
+  }));
 }
-const {tag} = Astro.props;
-let posts = await getBlogPosts();
-const tagPosts = getPostsByTag(posts, tag);
-const resultPosts = sortPostsByDate(tagPosts);
-const description = getListPageDescription(`「${tag}」タグの記事一覧`, resultPosts);
+
+const {tag, posts} = Astro.props;
 ---
 
-<IndexPage title={`タグ: ${tag}`} description={description} noindex={resultPosts.length < MIN_POSTS_FOR_INDEX}>
-  <SearchTitle label={tag} type="tag" count={resultPosts.length}/>
-  <PostSummaryList posts={resultPosts}/>
-</IndexPage>
+<LabelPostList type="tag" label={tag} posts={posts}/>

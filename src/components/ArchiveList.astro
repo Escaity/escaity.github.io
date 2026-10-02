@@ -1,9 +1,8 @@
 ---
 import dayjs from "dayjs";
-import getPostsByYear from "src/utils/getPostsByYear";
 
 const {posts, titleHover = true} = Astro.props;
-const resultPosts = getPostsByYear(posts);
+const resultPosts = Object.groupBy(posts, (post) => dayjs(post.data.date).format("YYYY"));
 const archiveAnchors = new Set();
 const getArchiveAnchor = (date) => {
   const key = dayjs(date).format("YYYY-MM");
