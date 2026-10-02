@@ -6,3 +6,6 @@ ba658e3c957845cbef8ee041d7d6a6ef47f108f0
 
 # カテゴリ・タグの表記統一: frontmatter の category / tags のみ変更
 7b5229f9e94eb770278fa36fd5e8714b70dcf3d0
+
+# 記事の description と画像の alt を整備: frontmatter の description・img の alt のみ変更
+31647af41e2b8a226d3a44c75eb5cabb6bf8672d
