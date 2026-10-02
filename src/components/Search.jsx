@@ -1,5 +1,5 @@
 import {createSignal, onMount} from "solid-js";
-import {dealLabel} from "../utils/dealLabel.ts"
+import {countLabels, getCategories, getLabels} from "../utils/labels.ts"
 import {formatDate} from "../utils/formatDate.ts";
 
 const toSearchText = (value) => String(value || '').toLowerCase();
@@ -14,15 +14,11 @@ const highlight = (text, searchTerm) => {
   return escapedText.replace(reg, (match) => `<mark>${match}</mark>`);
 };
 
-const countLabels = (posts, pick) => {
-  const counts = {};
-  posts.forEach(post => {
-    dealLabel(pick(post)).filter(label => label && label !== 'uncategorized').forEach(label => {
-      counts[label] = (counts[label] || 0) + 1;
-    });
-  });
-  return Object.entries(counts).sort((a, b) => b[1] - a[1]);
-};
+// 記事数の多い順の [ラベル, 記事数](未分類は除く)
+const sortedLabelCounts = (posts, key) =>
+  Object.entries(countLabels(posts, key))
+    .filter(([label]) => label !== 'uncategorized')
+    .sort((a, b) => b[1] - a[1]);
 
 // Pagefind の索引は本番ビルド時(astro build && pagefind)にだけ生成される。
 // 読み込めない環境(astro dev など)ではタイトル・概要の簡易検索にフォールバックする。
@@ -38,8 +34,8 @@ export function Search(props) {
   const [resultPosts, setResultPosts] = createSignal([])
   let latestSearchId = 0;
 
-  const categories = countLabels(props.posts, post => post.data.category);
-  const tags = countLabels(props.posts, post => post.data.tags);
+  const categories = sortedLabelCounts(props.posts, 'category');
+  const tags = sortedLabelCounts(props.posts, 'tags');
   const postsByUrl = new Map(props.posts.map(post => [`/${post.collection}/${post.id}/`, post]));
 
   const searchByTitleAndDescription = (searchTerm) => {
@@ -161,7 +157,7 @@ export function Search(props) {
                   <div class="tag">{formatDate(post.data.date)}</div>
                 </div> : ''}
 
-              {dealLabel(post.data.category).filter(item => item !== 'uncategorized').map((categoryName) => (
+              {getCategories(post.data.category).map((categoryName) => (
                 <div class="flex items-center">
                   <div class="divider-vertical"/>
                   <i class="ri-folder-2-fill mr-1"/>
@@ -169,7 +165,7 @@ export function Search(props) {
                 </div>
               ))}
 
-              {dealLabel(post.data.tags).map((tagName) => (
+              {getLabels(post.data.tags).map((tagName) => (
                 <div class="flex items-center">
                   <div class="divider-vertical"/>
                   <i class="ri-price-tag-3-fill mr-1"/>

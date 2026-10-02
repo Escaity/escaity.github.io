@@ -1,5 +1,5 @@
 ---
-import IndexPage from "src/layouts/IndexPage.astro";
+import IndexPage from "../layouts/IndexPage.astro";
 import {Search} from '../components/Search'
 import {getBlogPosts} from "../utils/posts";
 const posts = (await getBlogPosts()).map(({collection, id, data}) => ({

@@ -1,41 +1,23 @@
 ---
-import IndexPage from "src/layouts/IndexPage.astro";
-import Pagination from "src/components/Pagination.astro";
-import { sortPostsByDate } from "src/utils/sortPostsByDate";
-import  {site} from "../../consts";
-import { getBlogPosts } from "../../utils/posts";
-import ArchiveList from "src/components/ArchiveList.astro";
+import IndexPage from "../../layouts/IndexPage.astro";
+import Pagination from "../../components/Pagination.astro";
+import ArchiveList from "../../components/ArchiveList.astro";
+import {site} from "../../consts";
+import {getBlogPosts, paginate, sortPostsByDate} from "../../utils/posts";
+
+// 1ページ目は /archive (index.astro) が担うため、2ページ目以降のみ生成する
 export async function getStaticPaths() {
-  const posts = sortPostsByDate(await getBlogPosts());
-  const totalPage = Math.ceil(posts.length / site.archivePageSize);
-
-  // 1ページ目は /archive (index.astro) が担うため、2ページ目以降のみ生成する
-  return Array.from({length: Math.max(totalPage - 1, 0)}, (_, index) => {
-    const pageNumber = index + 2;
-    const start = (pageNumber - 1) * site.archivePageSize;
-
-    return {
-      params: {page: String(pageNumber)},
-      props: {
-        page: {
-          currentPage: pageNumber,
-          lastPage: totalPage,
-          data: posts.slice(start, start + site.archivePageSize),
-        },
-      },
-    };
-  });
+  const pages = paginate(sortPostsByDate(await getBlogPosts()), site.archivePageSize);
+  return pages.slice(1).map((posts, index) => ({
+    params: {page: String(index + 2)},
+    props: {posts, currentPage: index + 2, totalPage: pages.length},
+  }));
 }
-// 所有分页数据都将传递给 "page" 参数
-const { page } = Astro.props;
+
+const {posts, currentPage, totalPage} = Astro.props;
 ---
 
-<IndexPage title={`アーカイブ - ${page.currentPage}ページ目`}>
-  <ArchiveList posts={page.data}/>
-  <Pagination
-    currentPage={page.currentPage}
-    totalPage={page.lastPage}
-    prefixUrl="/archive/"
-    firstPageHref="/archive/"
-  />
+<IndexPage title={`アーカイブ - ${currentPage}ページ目`}>
+  <ArchiveList posts={posts}/>
+  <Pagination currentPage={currentPage} totalPage={totalPage} prefixUrl="/archive/" firstPageHref="/archive/"/>
 </IndexPage>

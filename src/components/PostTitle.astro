@@ -1,13 +1,13 @@
 ---
 import {formatDate} from "../utils/formatDate";
-import {dealLabel} from "../utils/dealLabel";
+import {getCategories, getLabels} from "../utils/labels";
 const {title, date, category, tags, lastModified = '', draft = false, readingTime = {}} = Astro.props
 ---
 
 <div>
   <!-- category -->
   {
-    category && dealLabel(category).filter(item => item !== 'uncategorized').map((categoryName) => (
+    getCategories(category).map((categoryName) => (
       <i class="ri-folder-3-line"/>
       <a href={"/category/" + categoryName + "/"} class="text-wrap break-all  hover:text-skin-active cursor-pointer">{categoryName}</a>
     ))
@@ -15,7 +15,7 @@ const {title, date, category, tags, lastModified = '', draft = false, readingTim
 
   <!-- tag -->
   {
-    tags && dealLabel(tags).map((tagName) => (
+    getLabels(tags).map((tagName) => (
       <div class="divider-vertical"/>
       <i class="ri-price-tag-3-line"/>
       <a href={"/tags/" + tagName + "/"} class="text-wrap break-all hover:text-skin-active cursor-pointer">{tagName}</a>

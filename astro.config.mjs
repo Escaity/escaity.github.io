@@ -7,7 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 import {remarkModifiedTime} from "./src/remarkPlugin/remark-modified-time.mjs";
 import {resetRemark} from "./src/remarkPlugin/reset-remark.js";
 import remarkDirective from "remark-directive";
-import {remarkAsides} from  './src/remarkPlugin/remark-asides.js'
+import {remarkAsides} from './src/remarkPlugin/remark-asides.js'
 
 import expressiveCode from "astro-expressive-code";
 import {pluginLineNumbers} from '@expressive-code/plugin-line-numbers'
@@ -16,15 +16,15 @@ import {visit} from 'unist-util-visit'
 import {pluginCollapsibleSections} from '@expressive-code/plugin-collapsible-sections'
 import {existsSync, readdirSync, readFileSync} from 'fs'
 import {getGitContentDates} from './src/utils/gitContentDates.ts'
+import {site} from './src/consts.ts'
 
-const SITE_URL = 'https://escaity.github.io/'
 const BLOG_DIR = 'src/content/blog'
 
 // 記事 URL(/blog/<id>/) → 記事ファイル。id はファイル名を小文字化したもの(glob ローダーの slug 化に合わせる)
 const blogFileByUrl = new Map(
   readdirSync(BLOG_DIR)
     .filter((file) => /\.mdx?$/.test(file))
-    .map((file) => [new URL(`/blog/${file.replace(/\.mdx?$/, '').toLowerCase()}/`, SITE_URL).href, `${BLOG_DIR}/${file}`])
+    .map((file) => [new URL(`/blog/${file.replace(/\.mdx?$/, '').toLowerCase()}/`, site.url).href, `${BLOG_DIR}/${file}`])
 )
 
 // noindex を付けたページ(検索・404・記事の少ないタグなど)は sitemap に載せない。
@@ -34,33 +34,23 @@ const isNoindexPage = (page) => {
   return existsSync(file) && readFileSync(file, 'utf-8').includes('<meta name="robots" content="noindex')
 }
 
+// 記事内の画像を遅延読み込みにし、クリックで拡大表示(fancybox)できるようにする
 function customRehypeLazyLoadImage() {
   return function (tree) {
-    visit(tree, function (node) {
-      if (node.tagName === 'img') {
-        if (node.properties['data-src']) {
-          node.properties.src = node.properties['data-src']
-          delete node.properties['data-src']
-        }
-        if (node.properties['data-alt']) {
-          node.properties.alt = node.properties['data-alt']
-          delete node.properties['data-alt']
-        }
-        node.properties.loading = 'lazy'
-        node.properties.decoding = 'async'
-        node.properties['data-fancybox'] = 'gallery'
-      }
+    visit(tree, {tagName: 'img'}, function (node) {
+      node.properties.loading = 'lazy'
+      node.properties.decoding = 'async'
+      node.properties['data-fancybox'] = 'gallery'
     })
   }
 }
 
 export default defineConfig({
-  site: SITE_URL,
-  output: 'static',
+  site: site.url,
   // canonical・sitemap と内部リンクの URL を末尾スラッシュ付きに統一(GitHub Pages の 301 リダイレクトを避ける)
   trailingSlash: 'always',
+  // Astro 7 の既定値は 'jsx'(空白の扱いが変わり見た目に影響する)ため明示する
   compressHTML: true,
-  adapter: undefined,
   redirects: {
     '/blog/1': '/',
     '/archive/1': '/archive/',
@@ -96,7 +86,7 @@ export default defineConfig({
   }), mdx()],
   markdown: {
     processor: unified({
-      remarkPlugins: [remarkModifiedTime, resetRemark, remarkDirective, remarkAsides({})],
+      remarkPlugins: [remarkModifiedTime, resetRemark, remarkDirective, remarkAsides],
       rehypePlugins: [customRehypeLazyLoadImage],
     }),
   }

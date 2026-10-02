@@ -1,7 +1,6 @@
 @import url('./github-markdown.css');
 
 @import "tailwindcss";
-@config "../../tailwind.config.js";
 
 @theme {
   --breakpoint-sm: 600px;
@@ -9,6 +8,10 @@
   --breakpoint-lg: 840px;
   --breakpoint-xl: 960px;
   --breakpoint-2xl: 1080px;
+}
+
+@utility container {
+  margin-inline: auto;
 }
 
 @utility text-skin-base {
@@ -27,10 +30,6 @@
   background-color: rgb(var(--color-active));
 }
 
-@utility bg-skin-accent {
-  background-color: rgb(var(--color-accent));
-}
-
 @utility bg-skin-fill {
   background-color: rgb(var(--color-fill));
 }
@@ -43,24 +42,12 @@
   background-color: rgb(var(--color-card));
 }
 
-@utility bg-skin-modal {
-  background-color: rgb(var(--color-modal));
-}
-
 @utility decoration-skin-base {
   text-decoration-color: rgb(var(--color-border));
 }
 
 @utility decoration-skin-active {
   text-decoration-color: rgb(var(--color-text-active));
-}
-
-@utility border-skin-base {
-  border-color: rgb(var(--color-border));
-}
-
-@utility border-skin-normal {
-  border-color: rgb(var(--color-text));
 }
 
 @utility border-skin-accent {
@@ -83,6 +70,8 @@
 html {
   height: 100%;
   scroll-padding-top: 72px;
+  /* 全要素対象だとページ内検索やアンカー移動まで遅くなるため html のみに限定 */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -106,13 +95,10 @@ menu {
     --color-fill-secondary: 230, 233, 239; /* mantle */
     --color-card: 239, 241, 245; /* base */
     --color-active: 188, 192, 204; /* surface1 */
-    --color-accent: 204, 208, 218; /* surface0 */
     --color-text: 76, 79, 105; /* text */
     --color-text-active: 30, 102, 245; /* blue */
     --color-text-accent: 114, 135, 253; /* lavender */
     --color-border: 156, 160, 176; /* overlay0 */
-    --color-border-active: 23, 146, 153; /* teal */
-    --color-modal: 30, 30, 46; /* mocha base */
   }
 
   /* Catppuccin Mocha */
@@ -121,13 +107,10 @@ menu {
     --color-fill-secondary: 17, 17, 27; /* crust */
     --color-card: 49, 50, 68; /* surface0 */
     --color-active: 69, 71, 90; /* surface1 */
-    --color-accent: 49, 50, 68; /* surface0 */
     --color-text: 205, 214, 244; /* text */
     --color-text-active: 137, 180, 250; /* blue */
     --color-text-accent: 180, 190, 254; /* lavender */
     --color-border: 88, 91, 112; /* surface2 */
-    --color-border-active: 148, 226, 213; /* teal */
-    --color-modal: 239, 241, 245; /* latte base */
   }
 
   #sun-icon,
@@ -169,24 +152,6 @@ menu {
   .menu-icon {
     @apply text-xl mr-2
   }
-
-  /* markdown内容图片样式 */
-  .image-cols-2 {
-    @apply grid gap-4 grid-cols-2 my-2
-  }
-
-  .image-cols-3 {
-    @apply grid gap-4 grid-cols-3 my-2
-  }
-
-  .image-cols-4 {
-    @apply grid gap-4 grid-cols-4 my-2
-  }
-}
-
-/* 全要素対象だとページ内検索やアンカー移動まで遅くなるため html のみに限定 */
-html {
-  scroll-behavior: smooth;
 }
 
 /* 分割线 */
@@ -236,13 +201,6 @@ a {
   line-height: 26px;
 }
 
-/*  网站列表样式清空 */
-ul,
-ol,
-menu {
-  list-style: none;
-}
-
 /* markdown 列表样式 */
 .markdown-body menu,
 .markdown-body ul {
@@ -251,11 +209,6 @@ menu {
 
 .markdown-body ol {
   list-style: decimal;
-}
-
-.markdown-body img {
-  /* 修改图片居中 */
-  /* margin: 0 auto; */
 }
 
 /* 修改滚动条样式 */

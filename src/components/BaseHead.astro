@@ -1,8 +1,9 @@
 ---
 import '../styles/index.css'
 import {site} from "../consts";
-import GoogleAnalytics from './GoogleAnalytics.astro';
 import {OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH} from '../utils/ogImage';
+// GA4 の測定 ID(G-XXXX)が環境変数にあるときだけ gtag.js を読み込む
+const gaId = import.meta.env.PUBLIC_GA_ID;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // ページ個別のタイトル・説明文(未指定時はサイト共通の値にフォールバック)
@@ -56,7 +57,19 @@ const jsonLd = isArticle
 ---
 <head>
   <!-- Google tag (gtag.js) -->
-  <GoogleAnalytics/>
+  {gaId?.startsWith('G-') && (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}/>
+      <script define:vars={{gaId}}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', gaId);
+      </script>
+    </>
+  )}
 
   <!-- Global Metadata -->
   <meta charset="utf-8"/>

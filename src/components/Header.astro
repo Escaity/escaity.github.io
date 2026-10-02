@@ -1,19 +1,24 @@
 ---
 import {archiveLimit, getSidebarData} from "../utils/sidebarData";
-import HeaderLink from './HeaderLink.astro';
-import ThemeIcon from './ThemeIcon.astro'
-import MenuIcon from './MenuIcon.astro'
 import {site, categories, infoLinks} from '../consts';
-import AsideIcon from "./SidebarIcon.astro";
 const {archives, categoryCount} = await getSidebarData();
+const {pathname} = Astro.url;
 // トップページではサイト名をページの見出し(h1)にする
-const SiteTitleTag = Astro.url.pathname === '/' ? 'h1' : 'div';
+const SiteTitleTag = pathname === '/' ? 'h1' : 'div';
+// ブログ1ページ目は "/" のため、Blog リンクはトップと /blog/* の両方で active にする
+const section = pathname.split('/')[1];
+const isActive = (href) => href === '/' ? pathname === '/' || section === 'blog' : href.split('/')[1] === section;
 ---
 
 <header class="fixed top-0 left-0 w-full bg-skin-fill text-skin-base z-10">
   <div class="flex items-center justify-between container">
     <div class="block xl:hidden">
-      <MenuIcon></MenuIcon>
+      <button type="button" id="menu-icon" class="header-btn" title="Menu">
+        <i class="ri-menu-fill"/>
+      </button>
+      <button type="button" id="menu-icon-close" class="header-btn hidden" title="Menu">
+        <i class="ri-close-fill"/>
+      </button>
     </div>
     <SiteTitleTag>
       <a class="ri-home-8-line text-2xl text-skin-accent p-4" href="/"> {site.title}</a>
@@ -23,14 +28,27 @@ const SiteTitleTag = Astro.url.pathname === '/' ? 'h1' : 'div';
         <div class="flex items-center space-x-5 pr-4">
           {
             categories.map(category => (
-              <HeaderLink href={category.href} icon={category.iconClass} target={category.target ? category.target : '_self'} children={category.children ? category.children : []}>{category.name}</HeaderLink>
+              <div class="relative h-10 w-auto flex items-center">
+                <a href={category.href} class:list={[isActive(category.href) ? 'header-link-active' : '', 'hover:header-link-hover']}>
+                  <i class={category.iconClass}/>
+                  {category.name}
+                </a>
+              </div>
             ))
           }
         </div>
       </div>
-      <ThemeIcon></ThemeIcon>
+      <button type="button" id="theme-btn" class="header-btn" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+        <i id="moon-icon" class="ri-sun-line"/>
+        <i id="sun-icon" class="ri-moon-line"/>
+      </button>
       <div class="block xl:hidden">
-        <AsideIcon></AsideIcon>
+        <button type="button" id="aside-btn" class="header-btn" title="Open Aside Bar" aria-label="auto" aria-live="polite">
+          <i class="ri-user-line"/>
+        </button>
+        <button type="button" id="aside-close-btn" class="header-btn hidden" title="Close Aside Bar" aria-label="auto" aria-live="polite">
+          <i class="ri-close-fill"/>
+        </button>
       </div>
     </div>
   </div>
@@ -38,26 +56,10 @@ const SiteTitleTag = Astro.url.pathname === '/' ? 'h1' : 'div';
     {
       categories.map((category) => (
         <div class="py-2">
-          <a class=" hover:text-skin-active" href={category.href}>
+          <a class="hover:text-skin-active" href={category.href}>
             <i class={category.iconClass}/>
             <span>{category.name}</span>
           </a>
-          {
-            category.children && category.children.length > 0 &&
-            <div class="divider-horizontal"></div>
-          }
-          <div class="space-y-4 text-sm">
-            {
-              category.children && category.children.map(sub =>
-                (
-                  <a class="block hover:text-skin-active" href={sub.href}>
-                    <i class={sub.iconClass}/>
-                    <span>{sub.name}</span>
-                  </a>
-                )
-              )
-            }
-          </div>
         </div>
       ))
     }
@@ -124,3 +126,25 @@ const SiteTitleTag = Astro.url.pathname === '/' ? 'h1' : 'div';
 
   </div>
 </header>
+
+<script>
+  // モバイル用のメニューとプロフィールの開閉(片方を開くともう片方は閉じる)
+  const toggles = [
+    ["menu-icon", "menu-icon-close", "mobile-menu"],
+    ["aside-btn", "aside-close-btn", "personal-info"],
+  ].map((ids) => ids.map((id) => document.getElementById(id)));
+
+  const setOpen = ([openButton, closeButton, panel], open) => {
+    openButton.classList.toggle("hidden", open);
+    closeButton.classList.toggle("hidden", !open);
+    panel.classList.toggle("hidden", !open);
+  };
+
+  toggles.forEach((toggle, index) => {
+    toggle[0].addEventListener("click", () => {
+      setOpen(toggles[1 - index], false);
+      setOpen(toggle, true);
+    });
+    toggle[1].addEventListener("click", () => setOpen(toggle, false));
+  });
+</script>

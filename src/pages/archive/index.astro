@@ -1,19 +1,14 @@
 ---
-import IndexPage from "src/layouts/IndexPage.astro";
+import IndexPage from "../../layouts/IndexPage.astro";
+import Pagination from "../../components/Pagination.astro";
+import ArchiveList from "../../components/ArchiveList.astro";
 import {site} from "../../consts";
-import {sortPostsByDate} from "src/utils/sortPostsByDate";
-import Pagination from "src/components/Pagination.astro";
-import {getBlogPosts} from "../../utils/posts";
-import ArchiveList from "src/components/ArchiveList.astro";
+import {getBlogPosts, paginate, sortPostsByDate} from "../../utils/posts";
 
-let posts = await getBlogPosts();
-let totalPage = Math.ceil(posts.length / site.archivePageSize);
-
-let sortedPosts = sortPostsByDate(posts);
-sortedPosts = sortedPosts.splice(0, site.archivePageSize);
+const pages = paginate(sortPostsByDate(await getBlogPosts()), site.archivePageSize);
 ---
 
 <IndexPage title="アーカイブ">
-  <ArchiveList posts={sortedPosts} titleHover={false}/>
-  <Pagination currentPage={1} totalPage={totalPage} prefixUrl="/archive/" firstPageHref="/archive/"/>
+  <ArchiveList posts={pages[0] ?? []} titleHover={false}/>
+  <Pagination currentPage={1} totalPage={pages.length} prefixUrl="/archive/" firstPageHref="/archive/"/>
 </IndexPage>

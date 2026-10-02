@@ -1,15 +1,61 @@
 ---
-import PostViewTitle from '../components/PostViewTitle.astro'
+import {formatDate} from "../utils/formatDate";
+import {getCategories, getLabels} from "../utils/labels";
 const {blog} = Astro.props;
 const {data, id} = blog
 ---
 
 <div class="relative shadow-md rounded-xl p-4 bg-skin-fill hover:shadow-lg transition-shadow">
-  <PostViewTitle
-    slug={`/blog/${id}/`}
-    {...data}
-  >
-  </PostViewTitle>
+  <div class="text-skin-base">
+    <!-- title -->
+    <div class="flex items-center">
+      {data.sticky > 0 &&
+        <div class="post-sticky select-none">固定</div>}
+      <!-- after疑似要素でカード全体をタップ領域にする(親カードが relative) -->
+      <a class="flex text-lg underline-offset-4 cursor-pointer decoration-skin-base decoration-wavy hover:text-skin-accent hover:decoration-sky-500 font-bold after:absolute after:inset-0" href={`/blog/${id}/`}>
+        {data.title}
+      </a>
+    </div>
+
+    <!-- relative でカード全面リンクの上に重ね、カテゴリ・タグを個別にクリック可能にする -->
+    <div class="relative flex flex-wrap items-center my-2 gap-x-2 gap-y-1">
+      <!-- date -->
+      {
+        data.date && (
+          <i class="text-skin-accent text-xl ri-calendar-2-fill"/>
+          <div class="text-sm">{formatDate(data.date)}</div>
+        )
+      }
+
+      <!-- draft -->
+      {
+        data.draft &&
+        <>
+          <div class="divider-vertical"/>
+          <i class="ri-git-pr-draft-line"/>
+          <div>下書き</div>
+        </>
+      }
+
+      <!-- category -->
+      {
+        getCategories(data.category).map((categoryName) => (
+          <div class="divider-vertical"/>
+          <i class="text-skin-accent text-xl ri-folder-3-line"/>
+          <a href={"/category/" + categoryName + "/"} class="text-sm text-wrap break-all hover:text-skin-active">{categoryName}</a>
+        ))
+      }
+
+      <!-- tag -->
+      {
+        getLabels(data.tags).map((tagName) => (
+          <div class="divider-vertical"/>
+          <i class="text-skin-accent text-xl ri-price-tag-3-line"/>
+          <a href={"/tags/" + tagName + "/"} class="text-sm text-wrap break-all hover:text-skin-active">{tagName}</a>
+        ))
+      }
+    </div>
+  </div>
   <p class="break-all text-skin-base line-clamp-2">
     {data.description || ''}
   </p>

@@ -1,42 +1,25 @@
 import {h as _h, s as _s} from "hastscript";
 import {remove} from "unist-util-remove";
 import {visit} from "unist-util-visit";
-const variants = new Set(["note", "tip", "caution", "danger"]);
 
-function defaultLabel(v) {
-  switch (v) {
-    case "note":
-      return "注記";
-    case "tip":
-      return "ヒント";
-    case "caution":
-      return "警告";
-    case "danger":
-      return "危険";
-    default:
-      return "";
-  }
-}
+const labels = {
+  note: "注記",
+  tip: "ヒント",
+  caution: "警告",
+  danger: "危険",
+};
 
-/** Hacky function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
-function h(el, attrs = {}, children = []) {
-  const {tagName, properties} = _h(el, attrs);
+/** Hacky function that wraps a hast element (from hastscript's h / s) as an mdast node ready for conversion to HTML by rehype. */
+const toMdast = (create) => (el, attrs = {}, children = []) => {
+  const {tagName, properties} = create(el, attrs);
   return {
     type: "paragraph",
     data: {hName: tagName, hProperties: properties},
     children,
   };
-}
-
-/** Hacky function that generates an mdast SVG tree ready for conversion to HTML by rehype. */
-function s(el, attrs = {}, children = []) {
-  const {tagName, properties} = _s(el, attrs);
-  return {
-    type: "paragraph",
-    data: {hName: tagName, hProperties: properties},
-    children,
-  };
-}
+};
+const h = toMdast(_h);
+const s = toMdast(_s);
 
 /**
  * remark plugin that converts blocks delimited with `:::` into styled
@@ -62,13 +45,7 @@ function s(el, attrs = {}, children = []) {
  * </Aside>
  * ```
  */
-export function remarkAsides(options) {
-  options = {
-    label: defaultLabel,
-    ...options,
-  };
-  const isAsideVariant = (s) => variants.has(s);
-
+export function remarkAsides() {
   const iconPaths = {
     // Information icon
     note: [
@@ -101,19 +78,19 @@ export function remarkAsides(options) {
     ],
   };
 
-  const transformer = (tree) => {
+  return (tree) => {
     visit(tree, (node, index, parent) => {
       if (!parent || index === undefined || node.type !== "containerDirective") {
         return;
       }
       const variant = node.name;
-      if (!isAsideVariant(variant)) return;
+      if (!Object.hasOwn(labels, variant)) return;
 
       // remark-directive converts a container’s “label” to a paragraph in
       // its children, but we want to pass it as the title prop to <Aside>, so
       // we iterate over the children, find a directive label, store it for the
       // title prop, and remove the paragraph from children.
-      let title = options.label?.(variant);
+      let title = labels[variant];
 
       remove(node, (child)=> {
         if (child.data && "directiveLabel" in child.data && child.data.directiveLabel) {
@@ -152,6 +129,4 @@ export function remarkAsides(options) {
       parent.children[index] = aside;
     });
   };
-
-  return () => transformer;
 }
