@@ -6,7 +6,7 @@ import Profile from '../components/Profile.astro'
 import Toc from '../components/Toc.astro'
 import ScrollToTop from '../components/ScrollToTop.astro'
 import {getCategories, getLabels} from '../utils/labels'
-const {frontmatter = {toc: false}, ogImage, publishedTime, modifiedTime} = Astro.props
+const {frontmatter = {toc: false}, ogImage, publishedTime, modifiedTime, headings = []} = Astro.props
 ---
 
 <html lang="ja">
@@ -28,8 +28,8 @@ const {frontmatter = {toc: false}, ogImage, publishedTime, modifiedTime} = Astro
     <div id="sidebar" class="hidden xl:block col-span-1 relative">
       <Profile></Profile>
       {
-        frontmatter.toc &&
-        <Toc></Toc>
+        frontmatter.toc && headings.length > 0 &&
+        <Toc headings={headings}></Toc>
       }
     </div>
     <div class="col-span-4 xl:col-span-3 space-y-4">

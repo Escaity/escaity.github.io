@@ -44,6 +44,7 @@ const relatedPosts = getRelatedPosts(posts, entry);
 ---
 <BlogPost
   frontmatter={entry.data}
+  headings={tocHeadings}
   ogImage={`/og/${entry.id}.png`}
   publishedTime={publishedDate.toISOString()}
   modifiedTime={modifiedDate?.toISOString()}

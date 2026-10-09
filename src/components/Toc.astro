@@ -1,3 +1,10 @@
+---
+const { headings = [] } = Astro.props;
+const minimumDepth = headings.length
+  ? Math.min(...headings.map(({ depth }) => depth))
+  : 0;
+---
+
 <div
   id="toc"
   class="shadow-md rounded-lg my-4 py-2 px-2 bg-skin-card sticky top-20"
@@ -7,7 +14,17 @@
     目次
   </div>
   <div class="overflow-auto">
-    <div class="toc-container"/>
+    <div class="toc-container">
+      <ol class="text-sm">
+        {headings.map((heading) => (
+          <li style={`padding-left: ${heading.depth - minimumDepth}rem`}>
+            <a class="block py-1 hover:text-skin-active" href={`#${heading.slug}`}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
   </div>
 </div>
 
@@ -24,14 +41,4 @@
     scrollSmoothDuration: 200,
     collapseDepth: 3,
   });
-  let toc = document.getElementById("toc");
-  if (toc) {
-    tocbot.refresh();
-    let tocContainer = document.getElementsByClassName('toc-container')
-    if (tocContainer[0].textContent.replace(/\s/g, '') === '') {
-      toc.classList.toggle('hidden')
-    } else {
-      toc.classList.add('block')
-    }
-  }
 </script>
